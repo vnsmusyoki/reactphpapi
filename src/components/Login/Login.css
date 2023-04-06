@@ -1,0 +1,71 @@
+/* NAME:Nithin Kumar Chappala            ID:1002041883 */
+/* NAME:Irrinki Bala Sai Sreemannarayana ID:1002058899: */
+/* NAME:Pranav Rayapati                  ID:1002077440 */
+/* NAME:Teja Sankara                     ID:1002033648 */
+/* NAME:Sai Kalyan Vanama                ID:1002082553 */
+
+
+.welcome-state{
+  padding: 2rem 0;
+  background-color: #F0A70F;
+}
+.welcome-state p{
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.login-form{
+  width: 98%;
+
+}
+.login-form h4{
+  font-size: 1.2rem;
+}
+.login-form label{
+  font-size: 1.2rem;
+
+}
+.login-form input{
+  border: none;
+  border-bottom: 2px solid black;
+  width: 100%;
+}
+.login-send-btn {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.login-send-btn{
+  border: none;
+  background-color: #F0A70F;
+  width: 100%;
+  border-bottom: 2px solid black;
+  font-size: 1.2rem;
+  padding: .4rem 0rem;
+  
+}
+
+.login-links{
+  line-height: 3;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .login{
+    display: flex;
+    justify-content: space-between;
+
+  }
+  .login-form, .welcome-state{
+    width: 70%;
+    height: 73vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+ 
+  .login-form div{
+    width: 90%;
+    padding-left: 1rem;
+  }
+}

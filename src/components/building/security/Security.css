@@ -1,0 +1,159 @@
+/* NAME:Nithin Kumar Chappala            ID:1002041883 */
+/* NAME:Irrinki Bala Sai Sreemannarayana ID:1002058899: */
+/* NAME:Pranav Rayapati                  ID:1002077440 */
+/* NAME:Teja Sankara                     ID:1002033648 */
+/* NAME:Sai Kalyan Vanama                ID:1002082553 */
+
+
+
+.b-search{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  
+}
+.b-search h3{
+  margin-top: 2rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #F0A70F;
+  text-align: center;
+}
+
+.b-search input{
+  font-size: 1.1rem;
+  border: solid #DDDDDD;
+  padding: .7rem 1rem;
+  width: 50%;
+  border-radius: .5rem;
+
+}
+.search-manager{
+  display: flex;
+  justify-content: center;
+}
+
+.search-manager button{
+  width: 20%;
+  border: 2px solid #001C3D;
+  background-color: #001C3D;
+  border-radius: .5rem;
+  color: white;
+  cursor: pointer;
+
+}
+.search-manager button:hover{
+  background-color: white;
+  color: #001C3D;
+  
+}
+.search-details{
+  width: 80%;
+}
+.b-search div{
+  width: 100%;
+}
+
+.table{
+  display: flex;
+  justify-content: center;
+  margin-top: 1.2rem;
+}
+
+table{
+  width: 95%;
+  border-collapse: collapse;
+}
+th{
+  background-color: #DDDDDD;
+  height: 2rem;
+  font-weight: 700;
+}
+
+th,td{
+  text-align: left;
+  padding: 5px;
+  border: 1px solid  #DDDDDD;
+  font-size: 1.2rem;
+ 
+}
+
+
+
+
+.b-add-form-form{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.5rem;
+
+}
+form{
+  width: 100%;
+}
+.b-add-form-form h4{
+  font-size: 2rem;
+  color: #F0A70F;
+  text-align: center;
+}
+.b-add-form-form label{
+  font-size: 1.2rem;
+  text-align: center;
+
+}
+.b-add-form-form input{
+  border: none;
+  border-bottom: 3px solid black;
+  width: 100%;
+}
+.b-add-form-send-btn {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.b-add-form-send-btn button{
+  border: none;
+  background-color: #F0A70F;
+  width: 100%;
+  border-bottom: 2px solid black;
+  font-size: 1.2rem;
+  padding: .4rem 0rem;
+  
+}
+
+.b-add-form-links{
+  line-height: 3;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.back-to-login-btn{
+  padding: .5rem .3rem;
+  background-color: #001C3D;
+  color: white;
+  font-weight: 600;
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .b-add-form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+  }
+  .b-add-form-form, .b-add-form-welcome-state{
+    width: 70%;
+    height: 73vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .b-add-form-form div{
+    width: 90%;
+    padding-left: 1rem;
+  }
+}

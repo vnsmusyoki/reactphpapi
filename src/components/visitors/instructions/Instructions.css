@@ -1,0 +1,23 @@
+/* NAME:Nithin Kumar Chappala            ID:1002041883 */
+/* NAME:Irrinki Bala Sai Sreemannarayana ID:1002058899: */
+/* NAME:Pranav Rayapati                  ID:1002077440 */
+/* NAME:Teja Sankara                     ID:1002033648 */
+/* NAME:Sai Kalyan Vanama                ID:1002082553 */
+
+
+.search-details{
+  padding: 1rem 2rem;
+}
+
+.search-details li{
+  list-style: lower-roman;
+}
+
+.search-map h3{
+  margin-top: 2rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #F0A70F;
+  text-align: center;
+}

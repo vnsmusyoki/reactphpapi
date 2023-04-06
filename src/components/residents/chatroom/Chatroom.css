@@ -1,0 +1,96 @@
+/* NAME:Nithin Kumar Chappala            ID:1002041883 */
+/* NAME:Irrinki Bala Sai Sreemannarayana ID:1002058899: */
+/* NAME:Pranav Rayapati                  ID:1002077440 */
+/* NAME:Teja Sankara                     ID:1002033648 */
+/* NAME:Sai Kalyan Vanama                ID:1002082553 */
+
+.chat-contacts{
+  background-color:#001C3D;
+  margin: 1rem;
+  padding: 1rem 1.4rem;
+}
+
+.chat-contacts h3{
+  font-size: 1.88rem;
+  font-weight: 700;
+  color: #F0A70F;
+  text-align: center;
+  margin-bottom: .5rem;
+}
+
+.chat-contacts p{
+  color: #001C3D;
+  background-color: #F0A70F;
+  padding: .8rem .6rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.g-chats{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.g-chats h4{
+  color: #F0A70F;
+  font-size: 1.3rem;
+
+}
+
+.g-chat-content{
+  background-color: #F2F2F2;
+  width: 70%;
+  overflow: scroll;
+  padding: .8rem 1rem;
+}
+
+.p-1{
+  float: left;
+  padding: .3rem .7rem;
+  background-color: #ADD8E6;
+  font-size: 1.2rem;
+  max-width: 60%;
+  border-radius: .5rem;
+}
+
+.p-2{
+  float: center;
+  padding: .3rem .7rem;
+  font-size: 1.2rem;
+  padding-block: 1rem;
+  opacity: .5;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 20%;
+  border-radius: .5rem;
+}
+
+.p-3{
+  float: right;
+  padding: .3rem .7rem;
+  background-color: #D3D3D3;
+  font-size: 1.2rem;
+  max-width: 60%;
+  border-radius: .5rem;
+}
+.chat-text-area{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chat-text-area textarea{
+  width: 80%;
+  height: 6rem;
+  padding: .5rem;
+  border-radius: .5rem;
+
+}
+.chat-text-area button{
+  background-color: #001C3D;
+  color: white;
+  height: 7rem;
+  margin-top: 1rem;
+  padding: 0 1rem;
+  margin-left: .5rem;
+  border-radius: .5rem;
+}

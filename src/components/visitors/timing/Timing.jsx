@@ -1,0 +1,147 @@
+import React, { useState } from "react";
+
+import { Link } from "react-router-dom";
+import VNavbar from "../navbar/GNavbar";
+
+export default function VTiming() {
+  
+
+  return (
+    <div>
+      <VNavbar/>
+
+      <div className="b-search">
+        <div className="search-details">
+          <h3>Gate Opening Hours</h3>
+          
+        </div>
+      </div>
+
+      <div className="table">
+        <table>
+          <tr>
+            
+            <th>Day of the Week	</th>
+            <th>Opening Gate Hours</th>
+            <th>Closing Gate Hours</th>
+          </tr>
+          <tr>
+            <td>Monday</td>
+            <td>4:00 AM</td>
+            <td>11:00 PM</td>           
+          </tr>
+          <tr>
+            <td>Tuesday</td>
+            <td>5:00 AM</td>
+            <td>11:00 PM</td>
+          </tr>   
+          <tr>
+            <td>Wednesday</td>
+            <td>4:00 AM</td>
+            <td>12:00 AM</td>
+          </tr>  
+          <tr>
+            <td>Thursday</td>
+            <td>4:00 AM</td>
+            <td>11:00 PM</td>
+          </tr> 
+          <tr>
+            <td>Friday</td>
+            <td>9:00 AM</td>
+            <td>5:00 PM</td>
+          </tr> 
+          <tr>
+            <td>Saturday</td>
+            <td>10:00 AM</td>
+            <td>4:00 PM</td>
+          </tr> 
+          <tr>
+            <td>Sunday</td>
+            <td>03:00 AM</td>
+            <td>11:00 PM</td>
+          </tr> 
+        </table>
+      </div>
+
+      <div className="b-search">
+        <div className="search-details">
+          <h3>Activities Opening Hours</h3>
+          
+        </div>
+      </div>
+
+      <div className="table">
+        <table>
+          <tr>
+            <th>Index</th>
+            <th>Activity</th>
+            <th>Open Hours(Weekdays)</th>
+            <th>Open Hours(weekends)</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Swimming</td>
+            <td>9:00 AM - 10:00 AM</td>
+            <td>6:00 AM - 8:00 PM</td>           
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Aerobics</td>
+            <td>10:30 AM - 11:30 AM</td>
+            <td>6:00 AM - 8:00 PM</td>
+          </tr>   
+          <tr>
+            <td>3</td>
+            <td>Yoga</td>
+            <td>12:00 PM - 1:00 PM</td>
+            <td>6:00 AM - 8:00 PM</td>
+          </tr>  
+          <tr>
+            <td>4</td>
+            <td>Spinning</td>
+            <td>2:00 PM - 3:00 PM</td>
+            <td>6:00 AM - 8:00 PM</td>
+          </tr> 
+          <tr>
+            <td>5</td>
+            <td>Zumba</td>
+            <td>4:00 PM - 5:00 PM</td>
+            <td>6:00 AM - 8:00 PM</td>
+          </tr> 
+          <tr>
+            <td>6</td>
+            <td>Pool</td>
+            <td>9:00 AM - 10:00 AM</td>
+            <td>6:00 AM - 8:00 PM</td>
+          </tr> 
+          <tr>
+            <td>7</td>
+            <td>Sauna</td>
+            <td>10:30 AM - 11:30 AM</td>
+            <td>6:00 AM - 8:00 PM</td>
+          </tr> 
+          <tr>
+            <td>8</td>
+            <td>Massage</td>
+            <td>12:00 PM - 1:00 PM</td>
+            <td>6:00 AM - 8:00 PM</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Squash</td>
+            <td>2:00 PM - 3:00 PM</td>
+            <td>6:00 AM - 8:00 PM</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Table Tennis</td>
+            <td>4:00 PM - 5:00 PM</td>
+            <td>6:00 AM - 8:00 PM</td>
+          </tr>
+        </table>
+      </div>
+
+      
+    </div>
+  );
+}

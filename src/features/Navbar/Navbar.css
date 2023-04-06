@@ -1,0 +1,142 @@
+/* NAME:Nithin Kumar Chappala            ID:1002041883 */
+/* NAME:Irrinki Bala Sai Sreemannarayana ID:1002058899: */
+/* NAME:Pranav Rayapati                  ID:1002077440 */
+/* NAME:Teja Sankara                     ID:1002033648 */
+/* NAME:Sai Kalyan Vanama                ID:1002082553 */
+
+
+.nav-menu {
+  height: 60px;
+  padding: 0.5rem 1rem;
+  position: relative;
+  z-index: 100;
+  background-color: #001C3D;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hamburger {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links {
+  position: absolute;
+  right: 1.2rem;
+  top: 4rem;
+  width: 90%;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #001C3D;
+  -webkit-column-count: 1;
+  -moz-column-count: 1;
+       column-count: 1;
+-webkit-column-gap: 2em;
+  -moz-column-gap: 2em;
+       column-gap: 2em;  
+}
+.nav-links a{
+  display: block;
+}
+
+.expand-menu {
+  display: none;
+}
+.navbar {
+  top: 0;
+  padding: 1rem 0.5rem;
+  transition: all 0.5s ease;
+  line-height: 2.5;
+}
+.navbar a {
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: 'Dancing Script', cursive;
+  line-height: 25px;
+  border-radius: 4px;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  font-family: 'Dancing Script', cursive;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+
+.logo1 a{
+  font-size: 25px;
+  font-family: 'Dancing Script', cursive;
+  font-weight: bold;
+  padding: 12px;
+  text-decoration: none;
+  color: #F0A70F;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  font-family: 'Dancing Script', cursive;
+  line-height: 25px;
+  
+}
+.logo a{
+  display: none;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+  .nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    overflow: hidden;
+    padding: 20px 10px;
+  }
+  .expand-menu {
+    display: block;
+  }
+  .nav-links {
+    position: relative;
+    top: 0;
+    right: 0;
+    border-radius: 0;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .navbar a{
+    padding-inline: 1rem;
+    color: white;
+  }
+  .logo a{
+    display: none;
+  }
+  .logo a{
+    font-size: 25px;
+    font-family: 'Dancing Script', cursive;
+    font-weight: bold;
+    padding: 12px;
+    text-decoration: none;
+    color: #F0A70F;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-family: 'Dancing Script', cursive;
+    line-height: 25px;
+  }
+}
