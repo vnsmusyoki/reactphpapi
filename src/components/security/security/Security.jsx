@@ -1,21 +1,37 @@
 import React, { useEffect, useState } from "react";
 import "./Security.css";
 import SNavbar from "../navbar/GNavbar";
-import axios from "axios";
+import { Link, Route, Routes } from "react-router-dom";
+//import axios from "axios";
+import EditSecurity from "./EditSecurity";
 
 export default function SSecurity() {
-  const [users, setUsers] = useState({});
-  useEffect(() => {
-    getSecurity();
-  }, []);
+  //Initialized users as an array
+  const [users, setUsers] = useState([]);
+
   function getSecurity() {
-    axios
+    //I've used fetch instead of axios
+    fetch("http://localhost/students/Guacuco/api/securityfetch.php")
+      .then((req) => req.json())
+      .then((data) => {
+        console.log(data);
+        setUsers(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    /*axios
       .get("http://localhost/students/Guacuco/api/securityfetch.php")
       .then(function (response) {
         console.log(response);
         setUsers(response.data);
-      });
+      });*/
   }
+
+  useEffect(() => {
+    getSecurity();
+  }, []);
 
   return (
     <div>
@@ -38,25 +54,39 @@ export default function SSecurity() {
               <th>Full Name</th>
               <th>Email Address</th>
               <th>Category</th>
-              <th>Password</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user, key) => (
-              <tr key={key}>
-                <td>{user.id}</td>
-                <td>{user.full_names}</td>
-                <td>{user.email}</td>
-                <td>{user.category}</td>
-                <td>{user.password}</td>
-               
-              </tr>
-            ))}
+            {users.map((user, key) => {
+              return (
+                <tr key={key}>
+                  <td>{user.id}</td>
+                  <td>{user.full_names}</td>
+                  <td>{user.email}</td>
+                  <td>{user.category}</td>
+                  <td>
+                    <Link to={`s-edit/${user.id}/edit`}>Edit</Link>
+                    <Routes>
+                      <Route
+                        path="s-edit/:id/edit"
+                        element={<EditSecurity />}
+                      />
+                    </Routes>
+                  </td>
+                  <td>
+                    <button>Delete</button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
-        
       </div>
-       
     </div>
   );
 }
+
+// hope unaiona
+

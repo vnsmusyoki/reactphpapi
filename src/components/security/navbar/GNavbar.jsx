@@ -27,7 +27,7 @@ export default function SNavbar(props) {
           <NavLink to="/s-security">Security</NavLink>
           <NavLink to="/s-timing">Timings</NavLink>
           <NavLink to="/s-visitors">Visitors</NavLink>
-          <NavLink to="/s-chat">Chatroom</NavLink>
+          <NavLink to="/s-chat">Chatroom</NavLink> 
           <NavLink to="/">Logout</NavLink>
         </div>
       </div>
