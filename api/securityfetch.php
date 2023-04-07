@@ -8,15 +8,18 @@ $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
     case 'GET':
         $sql = "SELECT * FROM `users`";
-        $querysql = mysqli_query($conn, $sql); 
+
+        $querysql = mysqli_query($conn, $sql);
         $queryrows = mysqli_num_rows($querysql);
         $users = array();
- 
-        if ($queryrows > 0) { 
+
+        if ($queryrows > 0) {
             while ($row = mysqli_fetch_assoc($querysql)) {
                 $users[] = $row;
             }
         }
+
+
         echo json_encode($users);
         break;
 }

@@ -18,13 +18,13 @@
   text-align: center;
 }
 
-.b-search input {
+/* .b-search input {
   font-size: 1.1rem;
   border: solid #dddddd;
   padding: 0.7rem 1rem;
   width: 50%;
   border-radius: 0.5rem;
-}
+} */
 .search-manager {
   display: flex;
   justify-content: center;
@@ -90,11 +90,7 @@ form {
   font-size: 1rem;
   text-align: center;
 }
-.b-add-form-form input {
-  border: none;
-  border-bottom: 3px solid black;
-  width: 100%;
-}
+ 
 .b-add-form-send-btn {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -107,7 +103,10 @@ form {
   font-size: 1rem;
   padding: 0.4rem 0rem;
 }
-
+.b-add-form-forms{
+  width:60vw;
+  margin-left: 20vw;
+}
 .b-add-form-links {
   line-height: 3;
   text-align: center;
@@ -125,7 +124,22 @@ form {
 .bottom {
   padding-bottom: 1.2rem;
 }
-
+.form-group{
+  margin-bottom: 1rem;
+}
+.form-control{
+  display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
 @media only screen and (min-width: 768px) {
   .b-add-form {
     display: flex;

@@ -35,6 +35,7 @@ import SResidents from "./components/security/residents/Residents";
 import SSecurity from "./components/security/security/Security";
 import STiming from "./components/security/timing/Timing";
 import SVisitors from "./components/security/visitors/Visitors";
+import EditSecurity from "./components/security/security/EditSecurity";
 import SChatroom from "./components/security/chatroom/Chatroom";
 import VChatroom from "./components/visitors/chatroom/Chatroom";
 import VVehicle from "./components/visitors/vehicle/Vehicle";
@@ -69,37 +70,32 @@ function App() {
         <Route path="/g-chat" element={<GChatroom />} />
 
         {/* Pool */}
-        <Route path="/p-chat" element={<PChatroom />} /> 
+        <Route path="/p-chat" element={<PChatroom />} />
         <Route path="/p-timing" element={<PTiming />} />
         <Route path="/p-residents" element={<PResidents />} />
         <Route path="/p-visitors" element={<PVisitors />} />
         <Route path="/p-dashboard" element={<PDashboard />} />
 
-        
         {/* Residents */}
-        <Route path="/r-chat" element={<RChatroom />} /> 
+        <Route path="/r-chat" element={<RChatroom />} />
         <Route path="/r-timing" element={<RTiming />} />
-        <Route path="/r-vehicle" element={<RVehicle/>} />
+        <Route path="/r-vehicle" element={<RVehicle />} />
         <Route path="/r-membership" element={<RMembership />} />
 
         {/* Security */}
         <Route path="/s-dashboard" element={<SDashboard />} />
-        <Route path="/s-residents" element={<SResidents />} /> 
+        <Route path="/s-residents" element={<SResidents />} />
         <Route path="/s-security" element={<SSecurity />} />
         <Route path="/s-timing" element={<STiming />} />
         <Route path="/s-visitors" element={<SVisitors />} />
         <Route path="/s-chat" element={<SChatroom />} />
-
+        <Route path="/s-edit/:id/edit" element={<EditSecurity />} />
 
         {/* Visitors */}
         <Route path="/v-chat" element={<VChatroom />} />
         <Route path="/v-vehicle" element={<VVehicle />} />
         <Route path="/v-timing" element={<VTiming />} />
         <Route path="/v-instructions" element={<VInstructions />} />
-
-
-        
-       
       </Routes>
       {/* <Footer /> */}
     </div>

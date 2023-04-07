@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Security.css";
 import SNavbar from "../navbar/GNavbar";
-import { Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 //import axios from "axios";
 import EditSecurity from "./EditSecurity";
 
@@ -14,19 +14,12 @@ export default function SSecurity() {
     fetch("http://localhost/students/Guacuco/api/securityfetch.php")
       .then((req) => req.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setUsers(data);
       })
       .catch((e) => {
         console.log(e);
       });
-
-    /*axios
-      .get("http://localhost/students/Guacuco/api/securityfetch.php")
-      .then(function (response) {
-        console.log(response);
-        setUsers(response.data);
-      });*/
   }
 
   useEffect(() => {
@@ -66,14 +59,9 @@ export default function SSecurity() {
                   <td>{user.full_names}</td>
                   <td>{user.email}</td>
                   <td>{user.category}</td>
-                  <td>
-                    <Link to={`s-edit/${user.id}/edit`}>Edit</Link>
-                    <Routes>
-                      <Route
-                        path="s-edit/:id/edit"
-                        element={<EditSecurity />}
-                      />
-                    </Routes>
+                  <td> 
+                      <Link to={`/s-edit/${user.id}/edit`}>Edit</Link>
+                       
                   </td>
                   <td>
                     <button>Delete</button>
@@ -89,4 +77,3 @@ export default function SSecurity() {
 }
 
 // hope unaiona
-
