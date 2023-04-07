@@ -3,27 +3,54 @@ import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../features/Navbar/Navbar";
 import Footer from "../../features/Footer/Footer";
-import users from "../../../db";
 import axios from "axios";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState("");
 
+  const [inputs, setInputs] = useState({});
 
   const navigate = useNavigate();
-
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs((values) => ({ ...values, [name]: value }));
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-      const response = await axios.post('http://localhost/students/Guacuco/api/user/login.php', { email, password });
-      localStorage.setItem('token', response.data.token);
-      navigate('/s-dashboard')
-
-    }catch(error) {
-      setError('Invalid username or password');
-
+    try {
+      const response = await axios
+        .post("http://localhost/students/Guacuco/api/login.php", inputs)
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("category", res.data.category);
+          localStorage.setItem("userid", res.data.id);
+          if(res.data.category=="security"){
+            navigate("/s-dashboard");
+          }else{
+            navigate("/g-dashboard");
+          }
+          
+        })
+        .catch((error) => {
+          // console.log(error);
+          setErrors(error.response.data.message);
+          document.getElementById("error-display").classList.remove("hidden");
+          document
+            .getElementById("error-display")
+            .classList.add("display-block");
+          setTimeout(() => {
+            document.getElementById("error-display").classList.add("hidden");
+            document
+              .getElementById("error-display")
+              .classList.remove("display-block");
+          }, 2000);
+        });
+    } catch (errors) {
+      setErrors("Invalid username or passwords");
     }
     // const user = users.find((u) => u.email === email && u.password === password);
 
@@ -40,7 +67,6 @@ export default function Login() {
     // }else{
     //   alert('Invalid email or password');
     // }
-    
   };
 
   return (
@@ -53,6 +79,13 @@ export default function Login() {
             &nbsp;&nbsp;Back
           </p>
         </div>
+        <div
+          className="ml-20 alert alert-danger hidden"
+          id="error-display"
+          role="alert"
+        >
+          {errors}
+        </div>
         <div className="login-form">
           <div>
             <h4>Welcome Back</h4>
@@ -63,8 +96,9 @@ export default function Login() {
                 <br />
                 <input
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  value={inputs.email}
+                  onChange={handleChange}
                 />
               </div>
               <div>
@@ -73,14 +107,15 @@ export default function Login() {
                 <br />
                 <input
                   type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  name="password"
+                  value={inputs.password}
+                  onChange={handleChange}
                 />
               </div>
               <button type="submit" className="login-send-btn">
                 Login
               </button>
-              {error && <div>{error}</div>}
+              {/* {error && <div>{error}</div>} */}
             </form>
 
             <div className="login-links">

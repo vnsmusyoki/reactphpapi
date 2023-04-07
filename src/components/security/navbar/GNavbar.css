@@ -3,3 +3,9 @@
 /* NAME:Pranav Rayapati                  ID:1002077440 */
 /* NAME:Teja Sankara                     ID:1002033648 */
 /* NAME:Sai Kalyan Vanama                ID:1002082553 */
+.btn-logout{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+}

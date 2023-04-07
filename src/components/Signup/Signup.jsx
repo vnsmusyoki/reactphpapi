@@ -55,11 +55,11 @@ export default function Signup() {
                required
               >
                 <option value="">--Select category--</option>
-                <option value="/r-membership">Residents</option>
-                <option value="/v-instructions">Visitors</option>
+                <option value="resident">Residents</option>
+                <option value="visitor">Visitors</option>
+                <option value="security">Security</option>
               </select>
             </div>
-
             <div>
               <label>Password:</label>
               <br />
