@@ -4,10 +4,10 @@ import SNavbar from "../navbar/GNavbar";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 export default function SSecurity() {
-  const navigate = useNavigate; 
+  const navigate = useNavigate();
   const [inputs, setInputs] = useState({});
-  const [errors, setErrors] = useState({});
-  const { id } = useParams();  
+  const [errors, setErrors] = useState("");
+  const { id } = useParams();
   useEffect(() => {
     getSecurityofficer();
   }, []);
@@ -16,13 +16,13 @@ export default function SSecurity() {
       .get(
         `http://localhost/students/Guacuco/api/security/fetch_security_profile.php/${id}`
       )
-      .then((response) => { 
+      .then((response) => {
         setInputs(response.data[0]);
       })
       .catch((error) => {
         console.log(error);
       });
-  } 
+  }
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -36,13 +36,20 @@ export default function SSecurity() {
         inputs
       )
       .then((response) => {
-        navigate("/s-security");
+        // window.location.href="/s-security";
+        navigate('/s-security');
         console.log(response.data);
         setInputs(response.data[0]);
       })
       .catch((error) => {
         console.log(error.response);
-        setErrors(error.response.data.errors);
+        setErrors(error.response.data.message);
+        document.getElementById('error-display').classList.remove('hidden');
+        document.getElementById('error-display').classList.add('display-block');
+        setTimeout(() => {
+          document.getElementById('error-display').classList.add('hidden');
+          document.getElementById('error-display').classList.remove('display-block');
+        }, 2000);
         // alert(error.response.data.message);
       });
   };
@@ -57,6 +64,12 @@ export default function SSecurity() {
           </div>
         </div>
       </div>
+ 
+            <div className="ml-20 alert alert-danger hidden" id="error-display" role="alert">
+              
+              {errors}
+            </div>
+    
 
       <div className="b-add-form">
         <div className="b-add-form-forms">

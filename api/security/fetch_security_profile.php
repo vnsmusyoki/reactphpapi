@@ -47,12 +47,27 @@ switch ($method) {
             $checkuser = "UPDATE  `users` SET `full_names`='$name', `category`='$category',`email`='$email'  WHERE `id`= '$path[6]'";
             $queryupdate = mysqli_query($conn, $checkuser);
             if ($queryupdate) {
-                echo "record updated successfully";
+
                 $response = ['status' => '1', 'message' => 'Account Updated successfully'];
-                echo json_encode($response);
+                // echo json_encode($response);
             } else {
-                echo "record not updated successfully";
+                $response = ['status' => '0', 'message' => 'An error occurred while updating the account.'];
+                // echo json_encode($response);
             }
+        }
+        echo json_encode($response);
+        break;
+    case 'DELETE':
+        $path = explode('/', $_SERVER['REQUEST_URI']);
+        $user = json_decode(file_get_contents('php://input'));
+        $checkuser = "DELETE  FROM `users` WHERE `id`='$path[6]'";
+        $queryusers = mysqli_query($conn, $checkuser);
+        if ($queryusers) {
+            $response = ['status' => '1', 'message' => 'Security Team deleted successfull.'];
+            exit();
+        } else {
+            $response = ['status' => '0', 'message' => 'Account deletion failed.'];
+            exit();
         }
         echo json_encode($response);
         break;

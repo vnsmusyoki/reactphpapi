@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./Security.css";
 import SNavbar from "../navbar/GNavbar";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-//import axios from "axios";
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Routes,
+  useParams,
+} from "react-router-dom";
+import axios from "axios";
 import EditSecurity from "./EditSecurity";
 
 export default function SSecurity() {
   //Initialized users as an array
   const [users, setUsers] = useState([]);
+  const [errors, setError] = useState("");
+  const { id } = useParams();
 
   function getSecurity() {
     //I've used fetch instead of axios
@@ -21,6 +29,39 @@ export default function SSecurity() {
         console.log(e);
       });
   }
+  const deletesecurity = (id) => {
+    axios
+      .delete(
+        `http://localhost/students/Guacuco/api/security/fetch_security_profile.php/${id}`
+      )
+      .then(function (response) {
+        // console.log(response.data);
+        document.getElementById("error-display").classList.remove("hidden");
+        document
+          .getElementById("error-display")
+          .classList.add("display-block");
+        document.getElementById("error-display").innerHTML =
+          "Account successfully deleted.";
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+        getSecurity();
+      })
+      .catch((e) => {
+        setError(e.response.data.message);
+        document.getElementById("error-display").classList.remove("hidden");
+        document.getElementById("error-display").classList.add("display-block");
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+      });
+  };
 
   useEffect(() => {
     getSecurity();
@@ -38,7 +79,13 @@ export default function SSecurity() {
           </div>
         </div>
       </div>
-
+      <div
+        className="ml-20 alert alert-danger hidden"
+        id="error-display"
+        role="alert"
+      >
+        {errors}
+      </div>
       <div className="table bottom">
         <table>
           <thead>
@@ -59,12 +106,13 @@ export default function SSecurity() {
                   <td>{user.full_names}</td>
                   <td>{user.email}</td>
                   <td>{user.category}</td>
-                  <td> 
-                      <Link to={`/s-edit/${user.id}/edit`}>Edit</Link>
-                       
+                  <td>
+                    <Link to={`/s-edit/${user.id}/edit`}>Edit</Link>
                   </td>
                   <td>
-                    <button>Delete</button>
+                    <button onClick={() => deletesecurity(user.id)}>
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );
