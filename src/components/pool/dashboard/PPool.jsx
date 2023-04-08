@@ -1,29 +1,26 @@
-import React, { useEffect, useState } from "react";
-import "./Security.css";
+import React,{ useEffect, useState }from 'react';
 import SNavbar from "../navbar/GNavbar";
 import {
-  BrowserRouter,
-  Link,
-  Route,
-  Routes,
-  useParams,
-} from "react-router-dom";
-import axios from "axios";
-import EditSecurity from "./EditSecurity";
-
-export default function SSecurity() {
-  //Initialized users as an array
-  const [users, setUsers] = useState([]);
+    BrowserRouter,
+    Link,
+    Route,
+    Routes,
+    useParams,
+  } from "react-router-dom";
+  import axios from "axios";
+export default function PPool() {
+    //Initialized users as an array
+  const [pools, setPools] = useState([]);
   const [errors, setError] = useState("");
-  const { id } = useParams();
+//   const { id } = useParams();
 
   function getSecurity() {
     //I've used fetch instead of axios
-    fetch("http://localhost/students/Guacuco/api/allsecurity.php")
+    fetch("http://localhost/students/Guacuco/api/all-pools.php")
       .then((req) => req.json())
       .then((data) => {
         // console.log(data);
-        setUsers(data);
+        setPools(data);
       })
       .catch((e) => {
         console.log(e);
@@ -72,9 +69,9 @@ export default function SSecurity() {
       <SNavbar />
       <div className="b-search">
         <div className="search-details">
-          <h3>Security Team Members</h3>
+          <h3>All Pools</h3>
           <div className="search-manager"> 
-            <Link to='/s-security/add'>Register Member</Link>
+            <Link to='/p-all-pools/add'>Add New Pool</Link>
           </div>
         </div>
       </div>
@@ -90,34 +87,28 @@ export default function SSecurity() {
           <thead>
             <tr>
               <th>Index</th>
-              <th>Full Name</th>
-              <th>Email Address</th>
-              <th>Category</th>
-              <th>ID Number</th> 
-              <th>Phone Number</th>
-              <th>Gender</th>
-              <th>Shift</th>
+              <th>Pool Name</th>
+              <th>Capacity</th>
+              <th>Status</th>
+              <th>Date Created</th>  
               <th>Edit</th>
               <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((user, key) => {
+            {pools.map((pool, key) => {
               return (
                 <tr key={key}>
-                  <td>{user.id}</td>
-                  <td>{user.full_names}</td>
-                  <td>{user.email}</td>
-                  <td>{user.category}</td>
-                  <td>{user.id_number}</td>
-                  <td>{user.phone_number}</td>
-                  <td>{user.gender}</td>
-                  <td>{user.shift}</td>
+                  <td>{pool.id}</td>
+                  <td>{pool.pool_name}</td>
+                  <td>{pool.capacity} People</td>
+                  <td>{pool.status}</td>
+                  <td>{pool.date_created}</td> 
                   <td>
-                    <Link to={`/s-edit/${user.id}/edit`}>Edit</Link>
+                    <Link to={`/p-all-pools-edit/${pool.id}/edit`}>Edit</Link>
                   </td>
                   <td>
-                    <button onClick={() => deletesecurity(user.id)}>
+                    <button onClick={() => deletesecurity(pool.id)}>
                       Delete
                     </button>
                   </td>
@@ -130,4 +121,3 @@ export default function SSecurity() {
     </div>
   );
 }
- 

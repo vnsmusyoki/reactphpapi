@@ -26,6 +26,9 @@ import PTiming from "./components/pool/timing/Timing";
 import PResidents from "./components/pool/residents/Residents";
 import PVisitors from "./components/pool/visitors/Visitors";
 import PDashboard from "./components/pool/dashboard/GDashboard";
+import PPool from "./components/pool/dashboard/PPool";
+import PPoolAdd from "./components/pool/dashboard/PPoolAdd";
+import PPoolEdit from "./components/pool/dashboard/PPoolEdit";
 import RChatroom from "./components/residents/chatroom/Chatroom";
 import RTiming from "./components/residents/timing/Timing";
 import RVehicle from "./components/residents/vehicle/Vehicle";
@@ -78,6 +81,9 @@ function App() {
         {/* Pool */}
         <Route path="/p-chat" element={<PChatroom />} />
         <Route path="/p-timing" element={<PTiming />} />
+        <Route path="/p-all-pools" element={<PPool />} />
+        <Route path="/p-all-pools/add" element={<PPoolAdd />} />
+        <Route path="/p-all-pools-edit/:id/edit" element={<PPoolEdit />} />
         <Route path="/p-residents" element={<PResidents />} />
         <Route path="/p-visitors" element={<PVisitors />} />
         <Route path="/p-dashboard" element={<PDashboard />} />

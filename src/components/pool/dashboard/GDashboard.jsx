@@ -1,9 +1,22 @@
-import React from 'react';
+import React,{ useEffect, useState } from 'react';
 import PNavbar from '../navbar/GNavbar';
-
+import axios from 'axios';
+import { NavLink,Link, Routes, Route } from "react-router-dom";
 
 
 export default function PDashboard() {
+  const [pools, setPools] = useState({});
+  useEffect(() => {
+    getSecurity(); 
+  }, []);
+  function getSecurity() {
+    axios
+      .get("http://localhost/students/Guacuco/api/all-pools.php")
+      .then(function (response) {
+        setPools(response.data);
+      });
+  }
+  // const [residents, setResidents] = useState({});
   return (
     <div>
       <PNavbar/>
@@ -12,8 +25,10 @@ export default function PDashboard() {
         <div className='boxes'>
           <div className='box box1'>
             <div>
-              <h5>Pools</h5>
-              <p>2</p>
+              
+              <Link to="/p-all-pools" className="allsecurity">All Pools</Link>
+
+              <p>{pools.length}</p>
             </div>
           </div>
 
