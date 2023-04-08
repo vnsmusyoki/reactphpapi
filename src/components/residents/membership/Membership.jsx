@@ -1,55 +1,101 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
-import './Membership.css';
+import "./Membership.css";
 import RNavbar from "../navbar/GNavbar";
-
+import axios from "axios";
 export default function RMembership() {
-  
-
+  useEffect(() => {
+    enrolledactivites();
+    allactivites();
+  }, []); 
+  var userid = localStorage.getItem("userid");
+  console.log(localStorage);
+  console.log(userid);
+  const [activities, setActivities] = useState([]);
+  const [allactivities, setAllActivities] = useState([]);
+  function enrolledactivites() {
+    console.log(userid);
+ 
+    axios
+      .get(
+        `http://localhost/students/Guacuco/api/residents/enrolled-activities.php/${userid}`
+      )
+      .then((response) => {
+        // console.log(response);
+        // setActivities(response.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  function allactivites() {
+    fetch("http://localhost/students/Guacuco/api/residents/all-activities.php")
+      .then((req) => req.json())
+      .then((data) => {
+        // console.log(data);
+        // setUsers(data);
+        setAllActivities(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+  const deletesecurity = (id) => {
+    axios
+      .delete(
+        `http://localhost/students/Guacuco/api/security/fetch_security_profile.php/${id}`
+      )
+      .then(function (response) {
+        // console.log(response.data);
+        document.getElementById("error-display").classList.remove("hidden");
+        document
+          .getElementById("error-display")
+          .classList.add("display-block");
+        document.getElementById("error-display").innerHTML =
+          "Account successfully deleted.";
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+        getSecurity();
+      })
+      .catch((e) => {
+        setError(e.response.data.message);
+        document.getElementById("error-display").classList.remove("hidden");
+        document.getElementById("error-display").classList.add("display-block");
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+      });
+  };
   return (
     <div>
-      <RNavbar/>
+      <RNavbar />
       <div className="b-search">
         <div className="search-details">
           <h3>You are currently a member in the following activities</h3>
-          
         </div>
       </div>
 
       <div className="table">
         <table>
-          <tr>
-            <th>Index</th>
-            <th>Activity</th>
-            <th>
-            Leave
-            </th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Swimming</td>
-            <td>
-              <button>Deenroll</button>
-            </td>          
-          </tr>
-
-          <tr>
-            <td>2</td>
-            <td>Yoga</td>
-            <td>
-              <button>Deenroll</button>
-            </td>          
-          </tr>
-
-          <tr>
-            <td>3</td>
-            <td>Spinning</td>
-            <td>
-              <button>Deenroll</button>
-            </td>          
-          </tr>
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>Activity</th>
+              <th>Date Joined</th>
+              <th>Leave</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
         </table>
+        {activities.length}
       </div>
 
       <div className="b-search">
@@ -60,73 +106,33 @@ export default function RMembership() {
 
       <div className="table bottom">
         <table>
-          <tr>
-            <th>Index</th>
-            <th>Activity</th>
-            <th>
-            Join
-            </th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Tennis</td>
-            <td>
-              <button>Join</button>
-            </td>          
-          </tr>
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>Activity</th>
+              <th>Join</th>
+            </tr>
+          </thead>
+          <tbody>
+          {allactivities.map((allactivity, key) => {
+            return (
+              <tr key={key}>
+                <td>{allactivity.id}</td>
+                <td>{allactivity.activity}</td>
 
-          <tr>
-            <td>2</td>
-            <td>Basketball</td>
-            <td>
-              <button>Join</button>
-            </td>          
-          </tr>
+                <td>
+                  <button onClick={() => deletesecurity(allactivity.id)}>
+                    Join
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+          </tbody>
 
-          <tr>
-            <td>3</td>
-            <td>Boxing</td>
-            <td>
-              <button>Join</button>
-            </td>          
-          </tr>
-
-          <tr>
-            <td>4</td>
-            <td>Badminton</td>
-            <td>
-              <button>Join</button>
-            </td>          
-          </tr>
-
-          <tr>
-            <td>5</td>
-            <td>Kickboxing</td>
-            <td>
-              <button>Join</button>
-            </td>          
-          </tr>
-
-          <tr>
-            <td>6</td>
-            <td>Martial Arts</td>
-            <td>
-              <button>Join</button>
-            </td>          
-          </tr>
-
-          <tr>
-            <td>7</td>
-            <td>Volleyball</td>
-            <td>
-              <button>Join</button>
-            </td>          
-          </tr>
+          
         </table>
       </div>
-
-
-      
     </div>
   );
 }

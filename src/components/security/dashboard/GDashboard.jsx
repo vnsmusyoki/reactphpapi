@@ -3,21 +3,30 @@ import SNavbar from "../navbar/GNavbar";
 import PNavbar from "../navbar/GNavbar";
 import axios from "axios";
 import { NavLink,Link, Routes, Route } from "react-router-dom";
-
+import './GDashboard.css';
 
 export default function SDashboard() {
   const [users, setUsers] = useState({});
-  useEffect(() => {
+  const [residents, setResidents] = useState({});
+   useEffect(() => {
     getSecurity();
+    getResidents(); 
   }, []);
   function getSecurity() {
     axios
       .get("http://localhost/students/Guacuco/api/allsecurity.php")
       .then(function (response) {
-        // console.log(response.data);
         setUsers(response.data);
       });
   }
+  function getResidents() {
+    axios
+      .get("http://localhost/students/Guacuco/api/allresidents.php")
+      .then(function (response) {
+        setResidents(response.data);
+      });
+  }
+ 
 
   return (
     <div>
@@ -42,8 +51,8 @@ export default function SDashboard() {
 
           <div className="box box1">
             <div>
-              <h5>Residents</h5>
-              <p>1300</p>
+            <Link to="/s-residents" className="allsecurity">All Residents</Link>
+              <p>{residents.length}</p>
             </div>
           </div>
 

@@ -32,10 +32,16 @@ import RVehicle from "./components/residents/vehicle/Vehicle";
 import RMembership from "./components/residents/membership/Membership";
 import SDashboard from "./components/security/dashboard/GDashboard";
 import SResidents from "./components/security/residents/Residents";
+import AddResidents from "./components/security/residents/AddResidents";
+import EditResident from "./components/security/residents/EditResident";
 import SSecurity from "./components/security/security/Security";
 import STiming from "./components/security/timing/Timing";
+import AddSTiming from "./components/security/timing/AddSTiming";
+import EditSTiming from "./components/security/timing/EditSTiming";
 import SVisitors from "./components/security/visitors/Visitors";
+import AddVisitor from "./components/security/visitors/AddVisitor";
 import EditSecurity from "./components/security/security/EditSecurity";
+import AddSecurity from "./components/security/security/AddSecurity";
 import SChatroom from "./components/security/chatroom/Chatroom";
 import VChatroom from "./components/visitors/chatroom/Chatroom";
 import VVehicle from "./components/visitors/vehicle/Vehicle";
@@ -85,11 +91,17 @@ function App() {
         {/* Security */}
         <Route path="/s-dashboard" element={<SDashboard />} />
         <Route path="/s-residents" element={<SResidents />} />
+        <Route path="/s-residents/add" element={<AddResidents />} />
+        <Route path="/s-residents/:id/edit" element={<EditResident />} />
         <Route path="/s-security" element={<SSecurity />} />
         <Route path="/s-timing" element={<STiming />} />
+        <Route path="/s-timing/add" element={<AddSTiming />} />
+        <Route path="/s-r-edit/:id/edit" element={<EditSTiming />} />
         <Route path="/s-visitors" element={<SVisitors />} />
+        <Route path="/s-visitors/add" element={<AddVisitor />} />
         <Route path="/s-chat" element={<SChatroom />} />
         <Route path="/s-edit/:id/edit" element={<EditSecurity />} />
+        <Route path="/s-security/add" element={<AddSecurity />} />
 
         {/* Visitors */}
         <Route path="/v-chat" element={<VChatroom />} />

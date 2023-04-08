@@ -2,7 +2,7 @@ import hamburger from "../../../assets/hamburger.png";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import './GNavbar.css';
+import "./GNavbar.css";
 
 export default function SNavbar(props) {
   const [navExpanded, setNavExpand] = useState(false);
@@ -14,28 +14,27 @@ export default function SNavbar(props) {
   useEffect(() => {
     checkauthuser();
   }, []);
-function checkauthuser() {
-  var user = localStorage.getItem("category");
-  if(user!=="security"){
-    navigate('/login');
+  function checkauthuser() {
+    var user = localStorage.getItem("category");
+    if (user !== "security") {
+      navigate("/login");
+    }
   }
-}
-  function logoutuser(e){
+  function logoutuser(e) {
     e.preventDefault();
     console.log(userid);
     axios
-      .post(
-        `http://localhost/students/Guacuco/api/logout.php/${userid}`
-      ).then((response)=>{
-                console.log(response);
+      .post(`http://localhost/students/Guacuco/api/logout.php/${userid}`)
+      .then((response) => {
+        console.log(response);
 
-        if(response.data[0].status=="1"){
+        if (response.data[0].status == "1") {
           localStorage.clear();
-          navigate('/login');
+          navigate("/login");
           // localStorage.removeItem('accessToken');
         }
-        
-      }).catch((error) =>{
+      })
+      .catch((error) => {
         console.error(error);
       });
   }
@@ -57,8 +56,10 @@ function checkauthuser() {
           <NavLink to="/s-security">Security</NavLink>
           <NavLink to="/s-timing">Timings</NavLink>
           <NavLink to="/s-visitors">Visitors</NavLink>
-          <NavLink to="/s-chat">Chatroom</NavLink> 
-          <button  onClick={logoutuser} className="btn-logout">Logout</button>
+          <NavLink to="/s-chat">Chatroom</NavLink>
+          <button onClick={logoutuser} className="btn-logout">
+            Logout
+          </button>
         </div>
       </div>
     </nav>

@@ -19,7 +19,7 @@ export default function SSecurity() {
 
   function getSecurity() {
     //I've used fetch instead of axios
-    fetch("http://localhost/students/Guacuco/api/securityfetch.php")
+    fetch("http://localhost/students/Guacuco/api/allsecurity.php")
       .then((req) => req.json())
       .then((data) => {
         // console.log(data);
@@ -73,9 +73,8 @@ export default function SSecurity() {
       <div className="b-search">
         <div className="search-details">
           <h3>Security Team Members</h3>
-          <div className="search-manager">
-            <input type="search" placeholder="Search..." />
-            <button>Search</button>
+          <div className="search-manager"> 
+            <Link to='/s-security/add'>Register Member</Link>
           </div>
         </div>
       </div>
@@ -94,6 +93,10 @@ export default function SSecurity() {
               <th>Full Name</th>
               <th>Email Address</th>
               <th>Category</th>
+              <th>ID Number</th> 
+              <th>Phone Number</th>
+              <th>Gender</th>
+              <th>Shift</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
@@ -106,6 +109,10 @@ export default function SSecurity() {
                   <td>{user.full_names}</td>
                   <td>{user.email}</td>
                   <td>{user.category}</td>
+                  <td>{user.id_number}</td>
+                  <td>{user.phone_number}</td>
+                  <td>{user.gender}</td>
+                  <td>{user.shift}</td>
                   <td>
                     <Link to={`/s-edit/${user.id}/edit`}>Edit</Link>
                   </td>

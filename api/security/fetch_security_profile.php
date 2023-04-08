@@ -4,9 +4,6 @@ ini_set('display_errors', 1);
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Methods: *");
-// include '../DbConnect.php';
-// $objDb = new DbConnect;
-// $conn = $objDb->connect();
 include '../db-connection.php';
 $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
@@ -71,4 +68,61 @@ switch ($method) {
         }
         echo json_encode($response);
         break;
+    case 'POST':
+        $user = json_decode(file_get_contents('php://input'));
+        $name = $user->full_names;
+        $email =   $user->email;
+        $phonenumber = $user->phone_number;
+        $gender = $user->gender;
+        $shift  = $user->shift;
+        $idnumber = $user->id_number;
+        $phonelength = strlen($phonenumber);
+        $idlength = strlen($idnumber);
+        if(empty($name) || empty($email) || empty($phonenumber) || empty($shift) || empty($gender) || empty($idnumber)){
+            http_response_code(400);
+            echo json_encode(array('message' => 'Please provide all the details required to  add new  account.'));
+            exit();
+        }elseif(!preg_match("/^[a-zA-z ]*$/", $name)){
+            http_response_code(400);
+            echo json_encode(array('message' => 'Please a valid name characters.'));
+            exit();
+        }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+            http_response_code(400);
+            echo json_encode(array('message' => 'Please a valid email address.'));
+            exit();
+        }elseif($idlength !== 8){
+            http_response_code(400);
+            echo json_encode(array('message' => 'ID number must have 8  digits.'));
+            exit();
+        } elseif($phonelength !== 10){
+            http_response_code(400);
+            echo json_encode(array('message' => 'Phone number must have 10 digits.'));
+            exit();
+        }else{
+            $checkphoneemail = "SELECT * FROM `users` WHERE `id_number`='$idnumber' OR `phone_number`='$phonenumber'";
+            $querycheckphoneemail = mysqli_query($conn, $checkphoneemail);
+            $queryrows = mysqli_num_rows($querycheckphoneemail);
+            if($queryrows >= 1){
+                http_response_code(400);
+                echo json_encode(array('message' => 'Email Address /  Phone Number already exists.'));
+                exit();
+            }else{
+                $password = md5("password");
+                $category = "security";
+                $add = "INSERT INTO `users`(`full_names`, `email`, `category`, `password`, `gender`, `id_number`, `phone_number`, `shift`) VALUES ('$name', '$email', '$category', '$password','$gender','$idnumber','$phonenumber','$shift')";
+                $queryadd = mysqli_query($conn, $add);
+                if($queryadd){
+                    $response = ['status' => '1', 'message' => 'Security Team created successfully.'];
+                    exit();
+                }else{
+                    http_response_code(400);
+                    echo json_encode(array('message' => 'An error occurred while creating this account.'));
+                    exit();
+                }
+            }
+
+        }
+        echo json_encode($response);
+        break;
+
 }

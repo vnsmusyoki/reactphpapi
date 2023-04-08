@@ -30,6 +30,8 @@ export default function Login() {
           localStorage.setItem("userid", res.data.id);
           if(res.data.category=="security"){
             navigate("/s-dashboard");
+          }else if(res.data.category=="resident"){
+            navigate("/r-membership");
           }else{
             navigate("/g-dashboard");
           }
