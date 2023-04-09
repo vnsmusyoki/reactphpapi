@@ -1,97 +1,102 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import SNavbar from "../navbar/GNavbar";
-import PNavbar from "../navbar/GNavbar";
-import axios from "axios";
-import { NavLink,Link, Routes, Route } from "react-router-dom";
+import axios from 'axios';
+import { Link } from 'react-router-dom'; 
 import './GDashboard.css';
 
 export default function SDashboard() {
   const [users, setUsers] = useState({});
   const [residents, setResidents] = useState({});
-   useEffect(() => {
+  const [visitors, setVisitors] = useState({});
+  const [gardeners, setGardeners] = useState({});
+  useEffect(() => {
     getSecurity();
-    getResidents(); 
+    getResidents();
+    getVisitors();
+    getGardeners();
   }, []);
   function getSecurity() {
     axios
-      .get("http://localhost/students/Guacuco/api/allsecurity.php")
+      .get("http://localhost/students/Guacuco/api/admin-allsecurity.php")
       .then(function (response) {
         setUsers(response.data);
       });
   }
+  function getGardeners() {
+    axios
+      .get("http://localhost/students/Guacuco/api/admin-allgardeners.php")
+      .then(function (response) {
+        setGardeners(response.data);
+      });
+  }
   function getResidents() {
     axios
-      .get("http://localhost/students/Guacuco/api/allresidents.php")
+      .get("http://localhost/students/Guacuco/api/admin-allresidents.php")
       .then(function (response) {
         setResidents(response.data);
       });
   }
- 
+  function getVisitors() {
+    axios
+      .get("http://localhost/students/Guacuco/api/admin-allvisitors.php")
+      .then(function (response) {
+        setVisitors(response.data);
+      });
+  }
 
   return (
     <div>
       <SNavbar />
       <div className="b-dashboard">
-        <h3>Terrazos Security Statistics</h3>
+        <h3>Terrazos Statistics</h3>
         <div className="boxes">
           <div className="box box1">
-            <div> 
-              <Link to="/b-security" className="allsecurity">Security</Link>
-              
+            <div>
+              <Link to="/s-visitors" className="allsecurity">
+                Security
+              </Link>
+
               <p>{users.length}</p>
             </div>
           </div>
 
           <div className="box box2">
             <div>
-              <h5>Visitors</h5>
-              <p>500</p>
+              <Link to="/s-visitors" className="allsecurity">
+                Visitors
+              </Link>
+              <p>{visitors.length}</p>
             </div>
           </div>
 
           <div className="box box1">
             <div>
-            <Link to="/b-residents" className="allsecurity">All Residents</Link>
+              <Link to="/s-residents" className="allsecurity">
+                Residents
+              </Link>
+
               <p>{residents.length}</p>
             </div>
           </div>
 
           <div className="box box2">
             <div>
-              <h5>Vehicles</h5>
-              <p>1200</p>
+            <Link to="/s-residents" className="allsecurity">
+                Gardeners
+              </Link>
+
+              <p>{gardeners.length}</p>
             </div>
           </div>
 
-          <div className="box box1">
-            <div>
-              <h5>Security</h5>
-              <p>400</p>
-            </div>
-          </div>
+          
 
-          <div className="box box2">
-            <div>
-              <h5>Visitors</h5>
-              <p>500</p>
-            </div>
-          </div>
-
-          <div className="box box1">
-            <div>
-              <h5>Residents</h5>
-              <p>1300</p>
-            </div>
-          </div>
-
-          <div className="box box2">
-            <div>
-              <h5>Vehicles</h5>
-              <p>1200</p>
-            </div>
-          </div>
+         
+ 
         </div>
       </div>
+
+      
     </div>
   );
 }

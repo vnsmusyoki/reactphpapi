@@ -43,6 +43,7 @@ import PPool from "./components/pool/dashboard/PPool";
 import PPoolAdd from "./components/pool/dashboard/PPoolAdd";
 import PPoolEdit from "./components/pool/dashboard/PPoolEdit";
 import RChatroom from "./components/residents/chatroom/Chatroom";
+import RChatroomChat from "./components/residents/chatroom/RChatroomChat";
 import RTiming from "./components/residents/timing/Timing";
 import RVehicle from "./components/residents/vehicle/Vehicle";
 import RMembership from "./components/residents/membership/Membership";
@@ -60,6 +61,7 @@ import EditSecurity from "./components/building/security/EditSecurity";
 import AddSecurity from "./components/building/security/AddSecurity";
 import AddBResidents from "./components/building/residents/AddBResidents";
 import SChatroom from "./components/security/chatroom/Chatroom";
+import SChatroomChat from "./components/security/chatroom/SChatroomChat";
 import VChatroom from "./components/visitors/chatroom/Chatroom";
 import VVehicle from "./components/visitors/vehicle/Vehicle";
 import VTiming from "./components/visitors/timing/Timing";
@@ -120,6 +122,7 @@ function App() {
 
         {/* Residents */}
         <Route path="/r-chat" element={<RChatroom />} />
+        <Route path="/r-chatroom-chat/:id" element={<RChatroomChat />} />
         <Route path="/r-timing" element={<RTiming />} />
         <Route path="/r-vehicle" element={<RVehicle />} />
         <Route path="/r-membership" element={<RMembership />} />
@@ -128,7 +131,7 @@ function App() {
         <Route path="/s-dashboard" element={<SDashboard />} />
         <Route path="/s-residents" element={<SResidents />} />
         <Route path="/s-residents/add" element={<AddResidents />} />
-              <Route path="/s-residents/:id/edit" element={<EditResident />} />
+        <Route path="/s-residents/:id/edit" element={<EditResident />} />
         <Route path="/s-security" element={<SSecurity />} />
         <Route path="/s-timing" element={<STiming />} />
         <Route path="/s-timing/add" element={<AddSTiming />} />
@@ -136,6 +139,7 @@ function App() {
         <Route path="/s-visitors" element={<SVisitors />} />
         <Route path="/s-visitors/add" element={<AddVisitor />} />
         <Route path="/s-chat" element={<SChatroom />} />
+        <Route path="/s-chatroom-chat/:id" element={<SChatroomChat />} />
         <Route path="/s-edit/:id/edit" element={<EditSecurity />} />
 
         {/* Visitors */}

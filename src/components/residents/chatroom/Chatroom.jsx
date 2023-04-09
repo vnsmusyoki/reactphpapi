@@ -1,39 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import RNavbar from '../navbar/GNavbar';
 
-import './Chatroom.css';
+import "./Chatroom.css";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function RChatroom() {
+  const [users, setusers] = useState([]);
+  useEffect(() => {
+    getallusers();
+  }, []);
+  function getallusers() {
+    axios
+      .get("http://localhost/students/Guacuco/api/all-users.php")
+      .then(function (response) {
+        setusers(response.data);
+      });
+  }
   return (
     <div>
-      <RNavbar/>
-      <div className='chat-contacts'>
+      <RNavbar />
+      <div className="chat-contacts">
         <h3>Contacts</h3>
-        <p>John Karate mgr</p>
-        <p>Emma Pool Mng</p>
-        <p>Michael Swimming tutor</p>
-        <p>Olivia Pool tutot</p>
-        <p>William Tennis Mgr</p>
+        {users.map((user, key) => {
+          return (
+            <p> 
+              <Link to={`/r-chatroom-chat/${user.id}`}>{user.full_names}</Link>
+
+            </p>
+          );
+        })}
       </div>
 
-      <div className='g-chats'>
-        <h4>Emma Pool Mng</h4>
-        <div className='g-chat-content' >
-          <p className='p-1'>Hello, how can I help you today?</p>
-          <p className='p-2'>Emma</p>
-          <p  className='p-3'>Hello, how can I help you today?</p>
-          <p className='p-2'>you</p>
-          <p className='p-1'>Sure, what would you like to know?</p>
-          <p className='p-2'>Emma</p>
-          <p className='p-3'>I want to know if I can cancel premium membership and get refunded.</p>
-          <p className='p-2'>you</p>
-          <div className='chat-text-area'>
-            <textarea cols='5' placeholder='Enter your message here' />
-            <button>Send</button>
-          </div>
-        </div>
-      </div>
       
     </div>
-  )
+  );
 }
