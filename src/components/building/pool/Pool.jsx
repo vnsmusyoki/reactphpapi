@@ -27,10 +27,10 @@ export default function BPool() {
         console.log(e);
       });
   }
-  const deletesecurity = (id) => {
+  const deletepoolmanager = (id) => {
     axios
       .delete(
-        `http://localhost/students/Guacuco/api/security/fetch_security_profile.php/${id}`
+        `http://localhost/students/Guacuco/api/building/fetch_pool_profile.php/${id}`
       )
       .then(function (response) {
         // console.log(response.data);
@@ -62,7 +62,7 @@ export default function BPool() {
   };
 
   useEffect(() => {
-    getSecurity();
+    deletepoolmanager();
   }, []);
 
   return (
@@ -110,10 +110,10 @@ export default function BPool() {
                   <td>{user.phone_number}</td>
                   <td>{user.gender}</td>
                   <td>
-                    <Link to={`/b-pools/${user.id}/edit`}>Edit</Link>
+                    <Link to={`/b-pool-manager/${user.id}/edit`}>Edit</Link>
                   </td>
                   <td>
-                    <button onClick={() => deleteResident(user.id)}>
+                    <button onClick={() => deletepoolmanager(user.id)}>
                       Delete
                     </button>
                     </td>

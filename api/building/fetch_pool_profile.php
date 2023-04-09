@@ -24,13 +24,14 @@ switch ($method) {
     case 'PUT':
         $path = explode('/', $_SERVER['REQUEST_URI']);
         $user = json_decode(file_get_contents('php://input'));
-        $name  = mysqli_real_escape_string($conn, $user->full_names);
-        $email  = mysqli_real_escape_string($conn, $user->email);
-        $gender  = mysqli_real_escape_string($conn, $user->gender);
-        $phone_number  = mysqli_real_escape_string($conn, $user->phone_number);
-        $id_number  = mysqli_real_escape_string($conn, $user->id_number);
-        $category  = mysqli_real_escape_string($conn, $user->category);
-        if (empty($email) || empty($category) || empty($name)) {
+        $name = $user->full_names;
+        $email =   $user->email;
+        $phonenumber = $user->phone_number;
+        $gender = $user->gender; 
+        $idnumber = $user->id_number;
+        $phonelength = strlen($phonenumber);
+        $idlength = strlen($idnumber);
+        if(empty($name) || empty($email) || empty($phonenumber)  || empty($gender) || empty($idnumber)){
 
             http_response_code(400);
             echo json_encode(array('message' => 'Please provide all the details required to  create new  account.'));
@@ -44,7 +45,7 @@ switch ($method) {
             echo json_encode(array('message' => 'Please provide valid email address.'));
             exit();
         } else {
-            $checkuser = "UPDATE  `users` SET `full_names`='$name', `category`='$category',`email`='$email'  WHERE `id`= '$path[6]'";
+            $checkuser = "UPDATE  `users` SET `full_names`='$name', `phone_number`='$phonenumber',`id_number`='$idnumber',`gender`='$gender',`email`='$email'  WHERE `id`= '$path[6]'";
             $queryupdate = mysqli_query($conn, $checkuser);
             if ($queryupdate) {
 
@@ -63,7 +64,7 @@ switch ($method) {
         $checkuser = "DELETE  FROM `users` WHERE `id`='$path[6]'";
         $queryusers = mysqli_query($conn, $checkuser);
         if ($queryusers) {
-            $response = ['status' => '1', 'message' => 'Security Team deleted successfull.'];
+            $response = ['status' => '1', 'message' => 'Pool Manager Account  deleted successfull.'];
             exit();
         } else {
             $response = ['status' => '0', 'message' => 'Account deletion failed.'];
