@@ -52,7 +52,7 @@ export default function BNavbar(props) {
           <NavLink to="/g-dashboard">Dashboard</NavLink>
           <NavLink to="/g-residents">Residents</NavLink>
           <NavLink to="/g-visitors">Visitors</NavLink>
-          <NavLink to="/g-timing">Timings</NavLink>
+          {/* <NavLink to="/g-timing">Timings</NavLink> */}
           <NavLink to="/g-chat">Chatroom</NavLink>
           <NavLink to="/">Logout</NavLink>
         </div>

@@ -28,6 +28,8 @@ import GResidents from "./components/garden/residents/Residents";
 import AddGResidents from "./components/garden/residents/AddGResidents";
 import EditGResidents from "./components/garden/residents/EditGResidents";
 import GVisitors from "./components/garden/visitors/Visitors";
+import AddGVisitors from "./components/garden/visitors/AddGVisitors";
+import EditGVisitors from "./components/garden/visitors/EditGVisitors";
 import GTiming from "./components/garden/timing/Timing";
 import GChatroom from "./components/garden/chatroom/Chatroom";
 import GChatroomChat from "./components/garden/chatroom/GChatroomChat";
@@ -99,6 +101,8 @@ function App() {
         <Route path="/g-residents/add" element={<AddGResidents />} />
         <Route path="/g-residents-edit/:id/edit" element={<EditGResidents />} />
         <Route path="/g-visitors" element={<GVisitors />} />
+        <Route path="/g-visitors/add" element={<AddGVisitors />} />
+        <Route path="/g-edit-visitors/:id/edit" element={<EditGVisitors />} />
         <Route path="/g-timing" element={<GTiming />} />
         <Route path="/g-chat" element={<GChatroom />} />
         <Route path="/g-chatroom-chat/:id" element={<GChatroomChat />} />
