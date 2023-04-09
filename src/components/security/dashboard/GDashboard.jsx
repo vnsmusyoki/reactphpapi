@@ -36,7 +36,7 @@ export default function SDashboard() {
         <div className="boxes">
           <div className="box box1">
             <div> 
-              <Link to="/s-security" className="allsecurity">Security</Link>
+              <Link to="/b-security" className="allsecurity">Security</Link>
               
               <p>{users.length}</p>
             </div>
@@ -51,7 +51,7 @@ export default function SDashboard() {
 
           <div className="box box1">
             <div>
-            <Link to="/s-residents" className="allsecurity">All Residents</Link>
+            <Link to="/b-residents" className="allsecurity">All Residents</Link>
               <p>{residents.length}</p>
             </div>
           </div>

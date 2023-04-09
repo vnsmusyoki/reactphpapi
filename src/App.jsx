@@ -44,8 +44,8 @@ import AddSTiming from "./components/security/timing/AddSTiming";
 import EditSTiming from "./components/security/timing/EditSTiming";
 import SVisitors from "./components/security/visitors/Visitors";
 import AddVisitor from "./components/security/visitors/AddVisitor";
-import EditSecurity from "./components/security/security/EditSecurity";
-import AddSecurity from "./components/security/security/AddSecurity";
+import EditSecurity from "./components/building/security/EditSecurity";
+import AddSecurity from "./components/building/security/AddSecurity";
 import SChatroom from "./components/security/chatroom/Chatroom";
 import VChatroom from "./components/visitors/chatroom/Chatroom";
 import VVehicle from "./components/visitors/vehicle/Vehicle";
@@ -71,6 +71,8 @@ function App() {
         <Route path="/b-gardens" element={<BGarden />} />
         <Route path="/b-residents" element={<BResidents />} />
         <Route path="/b-visitors" element={<BVisitors />} />
+        <Route path="/b-security/add" element={<AddSecurity />} />
+        <Route path="/b-edit/:id/edit" element={<EditSecurity />} />
 
         {/* Garden */}
         <Route path="/g-dashboard" element={<GDashboard />} />
@@ -109,7 +111,6 @@ function App() {
         <Route path="/s-visitors/add" element={<AddVisitor />} />
         <Route path="/s-chat" element={<SChatroom />} />
         <Route path="/s-edit/:id/edit" element={<EditSecurity />} />
-        <Route path="/s-security/add" element={<AddSecurity />} />
 
         {/* Visitors */}
         <Route path="/v-chat" element={<VChatroom />} />

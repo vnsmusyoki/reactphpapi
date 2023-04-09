@@ -73,9 +73,9 @@ export default function SSecurity() {
       <div className="b-search">
         <div className="search-details">
           <h3>Security Team Members</h3>
-          <div className="search-manager"> 
+          {/* <div className="search-manager"> 
             <Link to='/s-security/add'>Register Member</Link>
-          </div>
+          </div> */}
         </div>
       </div>
       <div
@@ -96,9 +96,7 @@ export default function SSecurity() {
               <th>ID Number</th> 
               <th>Phone Number</th>
               <th>Gender</th>
-              <th>Shift</th>
-              <th>Edit</th>
-              <th>Delete</th>
+              <th>Shift</th> 
             </tr>
           </thead>
           <tbody>
@@ -113,14 +111,7 @@ export default function SSecurity() {
                   <td>{user.phone_number}</td>
                   <td>{user.gender}</td>
                   <td>{user.shift}</td>
-                  <td>
-                    <Link to={`/s-edit/${user.id}/edit`}>Edit</Link>
-                  </td>
-                  <td>
-                    <button onClick={() => deletesecurity(user.id)}>
-                      Delete
-                    </button>
-                  </td>
+                   
                 </tr>
               );
             })}
