@@ -46,6 +46,8 @@ import RChatroom from "./components/residents/chatroom/Chatroom";
 import RChatroomChat from "./components/residents/chatroom/RChatroomChat";
 import RTiming from "./components/residents/timing/Timing";
 import RVehicle from "./components/residents/vehicle/Vehicle";
+import AddRVehicle from "./components/residents/vehicle/AddRVehicle";
+import EditRVehicle from "./components/residents/vehicle/EditRVehicle";
 import RMembership from "./components/residents/membership/Membership";
 import SDashboard from "./components/security/dashboard/GDashboard";
 import SResidents from "./components/security/residents/Residents";
@@ -125,6 +127,8 @@ function App() {
         <Route path="/r-chatroom-chat/:id" element={<RChatroomChat />} />
         <Route path="/r-timing" element={<RTiming />} />
         <Route path="/r-vehicle" element={<RVehicle />} />
+        <Route path="/r-vehicle/add" element={<AddRVehicle />} />
+        <Route path="/r-edit-vehicle/:id/edit" element={<EditRVehicle />} />
         <Route path="/r-membership" element={<RMembership />} />
 
         {/* Security */}
