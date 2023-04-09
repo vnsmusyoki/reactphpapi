@@ -50,7 +50,7 @@ export default function RNavbar(props) {
         <div className="navbar">
           {/* navbar links */}
           <NavLink to="/r-vehicle">Vehicle Management</NavLink>
-          <NavLink to="/r-timing">Timings</NavLink>
+          {/* <NavLink to="/r-timing">Timings</NavLink> */}
           <NavLink to="/r-membership">Membership</NavLink>
           <NavLink to="/r-chat">Chatroom</NavLink>
           <NavLink to="/">Logout</NavLink>
