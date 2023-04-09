@@ -3,11 +3,26 @@ import "./GDashboard.css";
 import SNavbar from "../navbar/GNavbar";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-export default function PPoolAdd() {
+export default function PPoolEdit() {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({});
   const [errors, setErrors] = useState("");
   const { id } = useParams();
+  useEffect(() => {
+    getpoolaccount();
+  }, []);
+  function getpoolaccount() {
+    axios
+      .get(
+        `http://localhost/students/Guacuco/api/pools/fetch_pools_profile.php/${id}`
+      )
+      .then((response) => {
+        setInputs(response.data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -16,8 +31,8 @@ export default function PPoolAdd() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post(
-        `http://localhost/students/Guacuco/api/pools/fetch_pools_profile.php`,
+      .put(
+        `http://localhost/students/Guacuco/api/pools/fetch_pools_profile.php/${id}/edit`,
         inputs
       )
       .then((response) => {
@@ -43,7 +58,9 @@ export default function PPoolAdd() {
       <SNavbar />
       <div className="b-search">
         <div className="search-details">
-          <h3>Create New Pool</h3>
+          <h3>
+            Edit Pool Details
+          </h3>
           <div className="search-manager">
             <Link to="/p-all-pools">Return Back</Link>
           </div>
@@ -81,11 +98,12 @@ export default function PPoolAdd() {
                 onChange={handleChange}
               />
             </div>
-            
+
             <div className="form-group">
               <label>Pool Status:</label>
               <select
-                name="pool_status" value={inputs.pool_status}
+                name="pool_status"
+                value={inputs.status}
                 id=""
                 onChange={handleChange}
                 className="form-control"
@@ -96,11 +114,9 @@ export default function PPoolAdd() {
                 <option value="Closed">Closed</option>
               </select>
             </div>
-             
-             
 
             <div className="b-add-form-send-btn">
-              <button>Create New Pool</button>
+              <button>Edit Pool Details</button>
             </div>
           </form>
         </div>

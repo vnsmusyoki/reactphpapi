@@ -26,10 +26,10 @@ export default function PPool() {
         console.log(e);
       });
   }
-  const deletesecurity = (id) => {
+  const deletepool = (id) => {
     axios
       .delete(
-        `http://localhost/students/Guacuco/api/security/fetch_security_profile.php/${id}`
+        `http://localhost/students/Guacuco/api/pools/fetch_pools_profile.php/${id}`
       )
       .then(function (response) {
         // console.log(response.data);
@@ -108,7 +108,7 @@ export default function PPool() {
                     <Link to={`/p-all-pools-edit/${pool.id}/edit`}>Edit</Link>
                   </td>
                   <td>
-                    <button onClick={() => deletesecurity(pool.id)}>
+                    <button onClick={() => deletepool(pool.id)}>
                       Delete
                     </button>
                   </td>
