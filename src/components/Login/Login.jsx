@@ -32,8 +32,8 @@ export default function Login() {
             navigate("/s-dashboard");
           }else if(res.data.category=="resident"){
             navigate("/r-membership");
-          }else if(res.data.category=="manager"){
-            navigate("/r-membership");
+          }else if(res.data.category=="building"){
+            navigate("/b-dashboard");
           }else if(res.data.category=="pool"){
             navigate("/p-dashboard");
           }else{
