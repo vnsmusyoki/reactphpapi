@@ -56,8 +56,7 @@ export default function Signup() {
               >
                 <option value="">--Select category--</option>
                 <option value="resident">Residents</option>
-                <option value="visitor">Visitors</option>
-                <option value="security">Security</option>
+                <option value="visitor">Visitors</option> 
               </select>
             </div>
             <div>

@@ -1,145 +1,130 @@
-import React, { useState } from "react";
-import BNavbar from "../navbar/BNavbar";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+// import "./Security.css"; 
+import BNavbar from '../navbar/BNavbar';
+ 
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Routes,
+  useParams,
+} from "react-router-dom";
+import axios from "axios"; 
 
-export default function BPool() {
-  const options = [
-    { value: "", text: "--Choose Pool Name --" },
-    { value: "business", text: "business" },
-    { value: "garden", text: "garden" },
-  ];
+export default function BPool() { 
+  const [users, setUsers] = useState([]);
+  const [errors, setError] = useState("");
+  const { id } = useParams();
 
-  const [selected, setSelected] = useState(options[0].value);
-
-  const handleChange = (event) => {
-    let value = event.target.value;
-    setSelected(value);
-    if (value === "business") {
-      console.log("ok");
-    }
+  function getSecurity() { 
+    fetch("http://localhost/students/Guacuco/api/admin-all-pool-managers.php")
+      .then((req) => req.json())
+      .then((data) => {
+        // console.log(data);
+        setUsers(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+  const deletesecurity = (id) => {
+    axios
+      .delete(
+        `http://localhost/students/Guacuco/api/security/fetch_security_profile.php/${id}`
+      )
+      .then(function (response) {
+        // console.log(response.data);
+        document.getElementById("error-display").classList.remove("hidden");
+        document
+          .getElementById("error-display")
+          .classList.add("display-block");
+        document.getElementById("error-display").innerHTML =
+          "Account successfully deleted.";
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+        getSecurity();
+      })
+      .catch((e) => {
+        setError(e.response.data.message);
+        document.getElementById("error-display").classList.remove("hidden");
+        document.getElementById("error-display").classList.add("display-block");
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+      });
   };
+
+  useEffect(() => {
+    getSecurity();
+  }, []);
 
   return (
     <div>
-      <BNavbar/>
+      <BNavbar />
       <div className="b-search">
         <div className="search-details">
-          <h3>Current Pool Managers</h3>
-          <div className="search-manager">
-            <input type="search" placeholder="Search..." />
-            <button>Search</button>
+          <h3>All Pool Managers </h3>
+          <div className="search-manager"> 
+            <Link to='/b-pool/add-manager'>Register New Manager</Link>
           </div>
         </div>
       </div>
-
+      <div
+        className="ml-20 alert alert-danger hidden"
+        id="error-display"
+        role="alert"
+      >
+        {errors}
+      </div>
       <div className="table bottom">
         <table>
-          <tr>
-            <th>Index</th>
-            <th>Name</th>
-            <th>Identity Number</th>
-            <th>Group Name</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>John Doe</td>
-            <td>123456789</td>
-            <td>Lions</td>
-            <td>
-              <button>Edit</button>
-            </td>
-            <td>
-              <button>Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jane Doe</td>
-            <td>987654321</td>
-            <td>Lions</td>
-            <td>
-              <button>Edit</button>
-            </td>
-            <td>
-              <button>Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Bob Smith</td>
-            <td>121212121</td>
-            <td>Tigers</td>
-            <td>
-              <button>Edit</button>
-            </td>
-            <td>
-              <button>Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Alice Johnson</td>
-            <td>343434343</td>
-            <td>Lions</td>
-            <td>
-              <button>Edit</button>
-            </td>
-            <td>
-              <button>Delete</button>
-            </td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>Full Name</th>
+              <th>Email Address</th>
+              <th>Category</th>
+              <th>ID Number</th> 
+              <th>Phone Number</th>
+              <th>Gender</th>
+              <th>Edit</th> 
+              <th>Delete</th> 
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, key) => {
+              return (
+                <tr key={key}>
+                  <td>{user.id}</td>
+                  <td>{user.full_names}</td>
+                  <td>{user.email}</td>
+                  <td>{user.category}</td>
+                  <td>{user.id_number}</td>
+                  <td>{user.phone_number}</td>
+                  <td>{user.gender}</td>
+                  <td>
+                    <Link to={`/b-pools/${user.id}/edit`}>Edit</Link>
+                  </td>
+                  <td>
+                    <button onClick={() => deleteResident(user.id)}>
+                      Delete
+                    </button>
+                    </td>
+                   
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
-      </div>
-
-      <div className="b-add-form">
-        <div className="b-add-form-form">
-          <form>
-            <h4>Add Pool Managers</h4>
-            <div>
-              <label>Name:</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div>
-              <label>Email:</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div>
-              <label>Identity Number:</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div>
-              <label>Pool Name:</label>
-              <select value={selected} onChange={handleChange}>
-                {options.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.text}
-                  </option>
-                ))}
-              </select>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div>
-              <label>Password:</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div className="b-add-form-send-btn">
-              <button>Add Security Manager</button>
-            </div>
-          </form>
-        </div>
       </div>
     </div>
   );
 }
+ 
