@@ -14,6 +14,8 @@ import BDashboard from "./components/building/dashboard/BDashboard";
 import BSecurity from "./components/building/security/Security";
 import BPool from "./components/building/pool/Pool";
 import BGarden from "./components/building/garden/Garden";
+import AddBGarden from "./components/building/garden/AddBGarden";
+import EditBGarden from "./components/building/garden/EditBGarden";
 import BResidents from "./components/building/residents/Residents";
 import EditBResident from "./components/building/residents/EditBResident";
 import AddBPoolManager from "./components/building/pool/AddBPoolManager";
@@ -75,6 +77,8 @@ function App() {
         <Route path="/b-security" element={<BSecurity />} />
         <Route path="/b-pool" element={<BPool />} />
         <Route path="/b-gardens" element={<BGarden />} />
+        <Route path="/b-gardens/add" element={<AddBGarden />} />
+        <Route path="/b-garderner-edit/:id/edit" element={<EditBGarden />} />
         <Route path="/b-residents" element={<BResidents />} />
         <Route path="/b-visitors" element={<BVisitors />} />
         <Route path="/b-visitors/add" element={<AddBVisitors />} />
