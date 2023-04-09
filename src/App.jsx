@@ -22,6 +22,7 @@ import GVisitors from "./components/garden/visitors/Visitors";
 import GTiming from "./components/garden/timing/Timing";
 import GChatroom from "./components/garden/chatroom/Chatroom";
 import PChatroom from "./components/pool/chatroom/Chatroom";
+import PChatroomChat from "./components/pool/chatroom/PChatroomChat";
 import PTiming from "./components/pool/timing/Timing";
 import PResidents from "./components/pool/residents/Residents";
 import PVisitors from "./components/pool/visitors/Visitors";
@@ -80,6 +81,7 @@ function App() {
 
         {/* Pool */}
         <Route path="/p-chat" element={<PChatroom />} />
+        <Route path="/p-chatroom-chat/:id" element={<PChatroomChat />} />
         <Route path="/p-timing" element={<PTiming />} />
         <Route path="/p-all-pools" element={<PPool />} />
         <Route path="/p-all-pools/add" element={<PPoolAdd />} />

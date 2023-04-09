@@ -39,11 +39,20 @@
 
 .g-chat-content{
   background-color: #F2F2F2;
-  width: 70%;
+  width: 90%;
   overflow: scroll;
   padding: .8rem 1rem;
-}
+  display: flex;
+  flex-direction: column;
 
+}
+.alltexts{
+  display: flex;
+  flex-direction: column;
+}
+.alltexts p{
+  margin-bottom:1rem;
+}
 .p-1{
   float: left;
   padding: .3rem .7rem;
