@@ -15,6 +15,7 @@ import BSecurity from "./components/building/security/Security";
 import BPool from "./components/building/pool/Pool";
 import BGarden from "./components/building/garden/Garden";
 import BResidents from "./components/building/residents/Residents";
+import EditBResident from "./components/building/residents/EditBResident";
 import BVisitors from "./components/building/visitors/Visitors";
 import GDashboard from "./components/garden/dashboard/GDashboard";
 import GResidents from "./components/garden/residents/Residents";
@@ -46,6 +47,7 @@ import SVisitors from "./components/security/visitors/Visitors";
 import AddVisitor from "./components/security/visitors/AddVisitor";
 import EditSecurity from "./components/building/security/EditSecurity";
 import AddSecurity from "./components/building/security/AddSecurity";
+import AddBResidents from "./components/building/residents/AddBResidents";
 import SChatroom from "./components/security/chatroom/Chatroom";
 import VChatroom from "./components/visitors/chatroom/Chatroom";
 import VVehicle from "./components/visitors/vehicle/Vehicle";
@@ -73,6 +75,8 @@ function App() {
         <Route path="/b-visitors" element={<BVisitors />} />
         <Route path="/b-security/add" element={<AddSecurity />} />
         <Route path="/b-edit/:id/edit" element={<EditSecurity />} />
+        <Route path="/b-residents/add" element={<AddBResidents />} />
+        <Route path="/b-residents/:id/edit" element={<EditBResident />} />
 
         {/* Garden */}
         <Route path="/g-dashboard" element={<GDashboard />} />
@@ -102,7 +106,7 @@ function App() {
         <Route path="/s-dashboard" element={<SDashboard />} />
         <Route path="/s-residents" element={<SResidents />} />
         <Route path="/s-residents/add" element={<AddResidents />} />
-        <Route path="/s-residents/:id/edit" element={<EditResident />} />
+              <Route path="/s-residents/:id/edit" element={<EditResident />} />
         <Route path="/s-security" element={<SSecurity />} />
         <Route path="/s-timing" element={<STiming />} />
         <Route path="/s-timing/add" element={<AddSTiming />} />
