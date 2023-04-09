@@ -1,135 +1,164 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BNavbar from "../navbar/BNavbar";
-import { Link } from "react-router-dom";
+
+import { Link, useParams } from "react-router-dom";
+import './Visitors.css';
+import axios from "axios";
 
 
 
 export default function BVisitors() {
   
+ 
+  const [users, setUsers] = useState([]);
+  const [errors, setError] = useState("");
+  const { id } = useParams();
+
+  function getResidents() { 
+    fetch("http://localhost/students/Guacuco/api/admin-allvisitors.php")
+      .then((req) => req.json())
+      .then((data) => {
+        // console.log(data);
+        setUsers(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+  const deleteResident = (id) => {
+    axios
+      .delete(
+        `http://localhost/students/Guacuco/api/building/fetch_visitors_profile.php/${id}`
+      )
+      .then(function (response) {
+        // console.log(response.data);
+        document.getElementById("error-display").classList.remove("hidden");
+        document
+          .getElementById("error-display")
+          .classList.add("display-block");
+        document.getElementById("error-display").innerHTML =
+          "Account successfully deleted.";
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+        getResidents();
+      })
+      .catch((e) => {
+        setError(e.response.data.message);
+        document.getElementById("error-display").classList.remove("hidden");
+        document.getElementById("error-display").classList.add("display-block");
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+      });
+  };
+  const checkout = (id) => {
+    axios
+      .delete(
+        `http://localhost/students/Guacuco/api/building/checkout_visitors_profile.php/${id}`
+      )
+      .then(function (response) {
+        // console.log(response.data);
+        document.getElementById("error-display").classList.remove("hidden");
+        document
+          .getElementById("error-display")
+          .classList.add("display-block");
+        document.getElementById("error-display").innerHTML =
+          "Account successfully deleted.";
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+        getResidents();
+      })
+      .catch((e) => {
+        setError(e.response.data.message);
+        document.getElementById("error-display").classList.remove("hidden");
+        document.getElementById("error-display").classList.add("display-block");
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+      });
+  };
+
+  useEffect(() => {
+    getResidents();
+  }, []);
 
   return (
     <div>
-      <BNavbar/>
+      <BNavbar />
       <div className="b-search">
         <div className="search-details">
           <h3>All Visitors</h3>
-          <div className="search-manager">
-            <input type="search" placeholder="Search..." />
-            <button>Search</button>
+          <div className="search-manager"> 
+            <Link to='/b-visitors/add'>Check In New Visitor</Link>
           </div>
         </div>
       </div>
-
-      <div className="table">
+      <div
+        className="ml-20 alert alert-danger hidden"
+        id="error-display"
+        role="alert"
+      >
+        {errors}
+      </div>
+      <div className="table bottom">
         <table>
-          <tr>
-            <th>Name</th>
-            <th>Identity </th>
-            <th>Rental Number</th>
-            <th>Edit</th>
-            <th>Check out</th>
-          </tr>
-          <tr>
-            <td>John Doe</td>
-            <td>123456789</td>
-            <td>Lions</td>
-            <td>
-              Edit
-            </td>
-            <td>
-              Check out
-            </td>
-          </tr>
-          <tr>
-            <td>Jane Doe</td>
-            <td>987654321</td>
-            <td>Lions</td>
-            <td>
-              Edit
-            </td>
-            <td>
-              Check out
-            </td>
-          </tr>
-          <tr>
-            <td>Bob Smith</td>
-            <td>121212121</td>
-            <td>Tigers</td>
-            <td>
-              Edit
-            </td>
-            <td>
-              Check out
-            </td>
-          </tr>
-          <tr>
-            <td>Alice Johnson</td>
-            <td>343434343</td>
-            <td>Lions</td>
-            <td>
-              Edit
-            </td>
-            <td>
-              Check out
-            </td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>Full Name</th>
+              <th>Phone Number</th>
+              <th>Visiting</th>
+              <th>Check In</th> 
+              <th>Check Out</th>
+              <th>Gender</th> 
+              <th>Edit</th>
+              <th>Check Out</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, key) => {
+              return (
+                <tr key={key}>
+                  <td>{user.id}</td>
+                  <td>{user.full_names}</td>
+                  <td>{user.phone_number}</td>
+                  <td>{user.visiting_area}</td>
+                  <td>{user.check_in}</td>
+                  <td>{user.check_out}</td>
+                  <td>{user.gender}</td> 
+                  <td>
+                    <Link to={`/b-edit-visitors/${user.id}/edit`}>Edit</Link>
+                  </td>
+                  <td>
+                    <button onClick={() => checkout(user.id)}>
+                      Check Out
+                    </button>
+                  </td>
+                  <td>
+                    <button onClick={() => deleteResident(user.id)}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
-      </div>
-
-      <div className="b-r-search-manager">
-        <button className="btn-1">Previous</button>
-        <button className="btn-2">1</button>
-        <button className="btn-2">2</button>
-        <button className="btn-1">Next</button>
-      </div>
-
-      <div className="b-add-form">
-        <div className="b-add-form-form">
-          <form>
-            <h4>Record Visitor</h4>
-            <div>
-              <label>Name:</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div>
-              <label>Email:</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div>
-              <label>Rental Residence:</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            
-            <div>
-              <h3>ADD VEHICLE DETAILS</h3>
-              <label>Registration Number:</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div>
-              <label>Model:</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div>
-              <label>Drivers License Linked:</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div className="b-add-form-send-btn">
-              <button>Record VIsitor</button>
-            </div>
-          </form>
-        </div>
       </div>
     </div>
   );

@@ -51,8 +51,8 @@ export default function BDashboard() {
 
           <div className='box box2'>
             <div>
-              <h5>Visitors</h5>
-              <p>500</p>
+            <Link to="/b-visitors" className="allsecurity">Visitors</Link>
+              <p>{visitors.length}</p>
             </div>
           </div>
 
