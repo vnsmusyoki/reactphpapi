@@ -23,6 +23,9 @@ import BResidents from "./components/building/residents/Residents";
 import EditBResident from "./components/building/residents/EditBResident";
 import AddBPoolManager from "./components/building/pool/AddBPoolManager";
 import EditBPoolManager from "./components/building/pool/EditBPoolManager";
+import BActivities from "./components/building/dashboard/BActivities";
+import BActivitiesEdit from "./components/building/dashboard/BActivitiesEdit";
+import BActivitiesAdd from "./components/building/dashboard/BActivitiesAdd";
 import BVisitors from "./components/building/visitors/Visitors";
 import AddBVisitors from "./components/building/visitors/AddBVisitors";
 import EditBVisitors from "./components/building/visitors/EditBVisitors";
@@ -91,6 +94,9 @@ function App() {
         <Route path="/b-dashboard" element={<BDashboard />} />
         <Route path="/b-security" element={<BSecurity />} />
         <Route path="/b-pool" element={<BPool />} />
+        <Route path="/b-activities" element={<BActivities />} />
+        <Route path="/b-activities/add" element={<BActivitiesAdd />} />
+        <Route path="/b-activies-edit/:id/edit" element={<BActivitiesEdit />} />
         <Route path="/b-gardens" element={<BGarden />} />
         <Route path="/b-payments" element={<BPayment />} />
         <Route path="/b-chatroom" element={<BChatRoom />} />
