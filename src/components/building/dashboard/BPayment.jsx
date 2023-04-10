@@ -28,21 +28,52 @@ export default function BPayment() {
   const ApprovePayment = (id) => {
     axios
       .delete(
-        `http://localhost/students/Guacuco/api/security/fetch_resident_profile.php/${id}`
+        `http://localhost/students/Guacuco/api/admin_approve_payment.php/${id}`
       )
       .then(function (response) {
         // console.log(response.data);
         document.getElementById("error-display").classList.remove("hidden");
         document.getElementById("error-display").classList.add("display-block");
         document.getElementById("error-display").innerHTML =
-          "Account successfully deleted.";
+          "Payment Approved Successfully.";
         setTimeout(() => {
           document.getElementById("error-display").classList.add("hidden");
           document
             .getElementById("error-display")
             .classList.remove("display-block");
         }, 2000);
-        getResidents();
+        getPayments();
+      })
+      .catch((e) => {
+        setError(e.response.data.message);
+        document.getElementById("error-display").classList.remove("hidden");
+        document.getElementById("error-display").classList.add("display-block");
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+      });
+  };
+  const RejectPayment = (id) => {
+    axios
+      .delete(
+        `http://localhost/students/Guacuco/api/admin_reject_payment.php/${id}`
+      )
+      .then(function (response) {
+        // console.log(response.data);
+        document.getElementById("error-display").classList.remove("hidden");
+        document.getElementById("error-display").classList.add("display-block");
+        document.getElementById("error-display").innerHTML =
+          "Payment Rejected Successfully.";
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+        getPayments();
       })
       .catch((e) => {
         setError(e.response.data.message);
@@ -101,6 +132,9 @@ export default function BPayment() {
                   <td>
                     <button onClick={() => ApprovePayment(payment.id)}>
                       Approve{" "}
+                    </button>
+                    <button onClick={() => RejectPayment(payment.id)} className="reject">
+                      Reject{" "}
                     </button>
                   </td>
                 </tr>

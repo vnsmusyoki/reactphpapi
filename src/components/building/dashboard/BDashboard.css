@@ -13,7 +13,13 @@
   padding-block: 1rem;
   color: #F0A70F;
 }
-
+.reject{
+  background-color: red;
+  color: aliceblue;
+  border:1px solid aliceblue;
+  font-size:12px;
+  margin-left:12px;
+}
 .box{
   width: 70%;
   height: 8rem;
