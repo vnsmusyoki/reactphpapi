@@ -47,7 +47,7 @@ export default function RMembership() {
       )
       .then(function (response) {
         console.log(response);
-         
+        enrolledactivites();
       })
       .catch((e) => {
         setError(e.response);
@@ -123,7 +123,7 @@ export default function RMembership() {
 
       <div className="b-search">
         <div className="search-details">
-          <h3>Other Activities that might interest You!</h3>
+          <h3>All Activities that might interest You!</h3>
         </div>
       </div>
 
@@ -133,6 +133,9 @@ export default function RMembership() {
             <tr>
               <th>Index</th>
               <th>Activity</th>
+              <th>Starts From</th>
+              <th>Ends At</th>
+              <th>Date Created</th>
               <th>Join</th>
             </tr>
           </thead>
@@ -142,6 +145,9 @@ export default function RMembership() {
                 <tr key={key}>
                   <td>{allactivity.id}</td>
                   <td>{allactivity.activity}</td>
+                  <td>{allactivity.starts_from}</td>
+                  <td>{allactivity.ends_at}</td>
+                  <td>{allactivity.date_created}</td>
 
                   <td>
                     <button onClick={() => joinactivity(allactivity.id)}>
