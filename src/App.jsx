@@ -52,6 +52,9 @@ import RVehicle from "./components/residents/vehicle/Vehicle";
 import AddRVehicle from "./components/residents/vehicle/AddRVehicle";
 import EditRVehicle from "./components/residents/vehicle/EditRVehicle";
 import RMembership from "./components/residents/membership/Membership";
+import RPayments from "./components/residents/membership/RPayments";
+import RPaymentsAdd from "./components/residents/membership/RPaymentsAdd";
+import RPaymentsEdit from "./components/residents/membership/RPaymentsEdit";
 import SDashboard from "./components/security/dashboard/GDashboard";
 import SResidents from "./components/security/residents/Residents";
 import AddResidents from "./components/security/residents/AddResidents";
@@ -136,6 +139,9 @@ function App() {
         <Route path="/r-vehicle/add" element={<AddRVehicle />} />
         <Route path="/r-edit-vehicle/:id/edit" element={<EditRVehicle />} />
         <Route path="/r-membership" element={<RMembership />} />
+        <Route path="/r-payments" element={<RPayments />} />
+        <Route path="/r-payments/add" element={<RPaymentsAdd />} />
+        <Route path="/r-edit-payment/:id/edit" element={<RPaymentsEdit />} />
 
         {/* Security */}
         <Route path="/s-dashboard" element={<SDashboard />} />

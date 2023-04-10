@@ -13,3 +13,6 @@
 .block-display {
     display: block;
 }
+.uppercase{
+    text-transform: uppercase;
+}
