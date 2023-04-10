@@ -48,6 +48,12 @@ export default function Signup() {
               <input type="email" name="email" onChange={handleChange} required />
             </div>
             <div>
+              <label>Phone Number:</label>
+              <br />
+              <br />
+              <input type="number" name="phone_number" onChange={handleChange} required />
+            </div>
+            <div>
               <label>Category:</label>
               <br />
               <br />

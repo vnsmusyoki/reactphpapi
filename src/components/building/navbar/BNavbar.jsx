@@ -56,6 +56,8 @@ export default function BNavbar(props) {
           <NavLink to="/b-gardens">Gardens</NavLink>
           <NavLink to="/b-residents">Residents</NavLink>
           <NavLink to="/b-visitors">Visitors</NavLink>
+          <NavLink to="/b-payments">Payments</NavLink>
+          <NavLink to="/b-chatroom">Chat Room</NavLink>
           <NavLink to="/">Logout</NavLink>
         </div>
       </div>

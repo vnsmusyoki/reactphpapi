@@ -11,6 +11,9 @@ import Services from "./components/Services/Services";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import Signup from "./components/Signup/Signup";
 import BDashboard from "./components/building/dashboard/BDashboard";
+import BPayment from "./components/building/dashboard/BPayment";
+import BChatRoom from "./components/building/dashboard/BChatRoom";
+import BChatRoomChat from "./components/building/dashboard/BChatRoomChat";
 import BSecurity from "./components/building/security/Security";
 import BPool from "./components/building/pool/Pool";
 import BGarden from "./components/building/garden/Garden";
@@ -86,6 +89,9 @@ function App() {
         <Route path="/b-security" element={<BSecurity />} />
         <Route path="/b-pool" element={<BPool />} />
         <Route path="/b-gardens" element={<BGarden />} />
+        <Route path="/b-payments" element={<BPayment />} />
+        <Route path="/b-chatroom" element={<BChatRoom />} />
+        <Route path="/b-chatroom-chat/:id" element={<BChatRoomChat />} />
         <Route path="/b-gardens/add" element={<AddBGarden />} />
         <Route path="/b-garderner-edit/:id/edit" element={<EditBGarden />} />
         <Route path="/b-residents" element={<BResidents />} />

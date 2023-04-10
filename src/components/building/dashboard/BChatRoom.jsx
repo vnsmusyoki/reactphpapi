@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from "react";
-import RNavbar from '../navbar/GNavbar';
+import BNavbar from "../navbar/BNavbar";
 
-import "./Chatroom.css";
+import "./BChatRoom.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function RChatroom() {
+export default function BChatRoom() {
   const [users, setusers] = useState([]);
   useEffect(() => {
     getallusers();
   }, []);
   function getallusers() {
     axios
-      .get("http://localhost/students/Guacuco/api/all-resident-users.php")
+      .get("http://localhost/students/Guacuco/api/all-users.php")
       .then(function (response) {
         setusers(response.data);
       });
   }
   return (
     <div>
-      <RNavbar />
+      <BNavbar />
       <div className="chat-contacts">
         <h3>Contacts</h3>
         {users.map((user, key) => {
           return (
             <p> 
-              <Link to={`/r-chatroom-chat/${user.id}`}>{user.full_names}</Link>
+              <Link to={`/b-chatroom-chat/${user.id}`}>{user.full_names}</Link>
 
             </p>
           );

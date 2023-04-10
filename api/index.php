@@ -11,9 +11,11 @@ switch ($method) {
        
         $name  = mysqli_real_escape_string($conn, $user->full_name);
         $email  = mysqli_real_escape_string($conn, $user->email);
+        $phonenumber  = mysqli_real_escape_string($conn, $user->phone_number);
         $category  = mysqli_real_escape_string($conn, $user->category);
         $password  = mysqli_real_escape_string($conn, $user->password);
         $passlength = strlen($password);
+        $phonelength = strlen($phonenumber);
         if (empty($email) || empty($password) || empty($category) || empty($name)) {
             http_response_code(400);
             echo json_encode(array('message' => 'Please provide all the details required to create a new account.'));
@@ -29,18 +31,22 @@ switch ($method) {
         } elseif ($passlength < 6) {
             http_response_code(400);
             echo json_encode(array('message' => 'Please password with minimum of 6 characters.'));
+            exit(); 
+        } elseif ($phonelength !== 10 ) {
+            http_response_code(400);
+            echo json_encode(array('message' => 'Phone Number must have 10 digits.'));
             exit();
         } else {
-            $checkemail = "SELECT * FROM `users` WHERE `email`= '$email'";
+            $checkemail = "SELECT * FROM `users` WHERE `email`= '$email' OR `phone_number`= '$phonenumber'";
             $queryemail = mysqli_query($conn, $checkemail);
             $emailrows = mysqli_num_rows($queryemail);
             if ($emailrows >= 1) {
                 http_response_code(400);
-                echo json_encode(array('message' => 'Email already exists'));
+                echo json_encode(array('message' => 'Email / Phone Number already exists'));
                 exit();
             } else {
                 $password = md5($user->password); 
-                $adduser = "INSERT INTO `users`(`full_names`, `email`, `category`, `password`) VALUES ('$user->full_name', '$user->email', '$user->category', '$password')";
+                $adduser = "INSERT INTO `users`(`full_names`, `email`, `category`, `password`, `phone_number`) VALUES ('$user->full_name', '$user->email', '$user->category', '$password', '$user->phone_number')";
                 $queryadduser = mysqli_query($conn, $adduser);
                 if ($queryadduser) {
                     $response = ['status' => '1', 'message' => 'Account created successfully'];

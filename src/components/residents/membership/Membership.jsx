@@ -8,26 +8,25 @@ export default function RMembership() {
   useEffect(() => {
     enrolledactivites();
     allactivites();
-  }, []); 
+  }, []);
   var userid = localStorage.getItem("userid");
-  console.log(localStorage);
-  console.log(userid);
+  
   const [activities, setActivities] = useState([]);
+  const [errors, setError] = useState([]);
   const [allactivities, setAllActivities] = useState([]);
   function enrolledactivites() {
-    console.log(userid);
- 
-    axios
-      .get(
-        `http://localhost/students/Guacuco/api/residents/enrolled-activities.php/${userid}`
-      )
-      .then((response) => {
-        // console.log(response);
-        // setActivities(response.data[0]);
+    // console.log(userid);
+    fetch(`http://localhost/students/Guacuco/api/residents/enrolled-activities.php/${userid}`)
+      .then((req) => req.json())
+      .then((data) => {
+        // console.log(data);
+        // setUsers(data);
+        setActivities(data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((e) => {
+        console.log(e);
       });
+    
   }
   function allactivites() {
     fetch("http://localhost/students/Guacuco/api/residents/all-activities.php")
@@ -41,37 +40,40 @@ export default function RMembership() {
         console.log(e);
       });
   }
-  const deletesecurity = (id) => {
+  const joinactivity = (id) => {
     axios
-      .delete(
-        `http://localhost/students/Guacuco/api/security/fetch_security_profile.php/${id}`
+      .get(
+        `http://localhost/students/Guacuco/api/residents/join_activities.php/${id}/${userid}`
       )
       .then(function (response) {
-        // console.log(response.data);
-        document.getElementById("error-display").classList.remove("hidden");
-        document
-          .getElementById("error-display")
-          .classList.add("display-block");
-        document.getElementById("error-display").innerHTML =
-          "Account successfully deleted.";
-        setTimeout(() => {
-          document.getElementById("error-display").classList.add("hidden");
-          document
-            .getElementById("error-display")
-            .classList.remove("display-block");
-        }, 2000);
-        getSecurity();
+        console.log(response);
+         
       })
       .catch((e) => {
-        setError(e.response.data.message);
-        document.getElementById("error-display").classList.remove("hidden");
-        document.getElementById("error-display").classList.add("display-block");
-        setTimeout(() => {
-          document.getElementById("error-display").classList.add("hidden");
-          document
-            .getElementById("error-display")
-            .classList.remove("display-block");
-        }, 2000);
+        setError(e.response);
+        // document.getElementById("error-display").classList.remove("hidden");
+        // document.getElementById("error-display").classList.add("display-block");
+        // setTimeout(() => {
+        //   document.getElementById("error-display").classList.add("hidden");
+        //   document
+        //     .getElementById("error-display")
+        //     .classList.remove("display-block");
+        // }, 2000);
+        
+      });
+  };
+  const exitactivity = (id) => {
+    axios
+      .delete(
+        `http://localhost/students/Guacuco/api/residents/enrolled-activities.php/${id}`
+      )
+      .then(function (response) {
+        console.log(response);
+        enrolledactivites();
+      })
+      .catch((e) => {
+        setError(e.response);
+        
       });
   };
   return (
@@ -82,7 +84,13 @@ export default function RMembership() {
           <h3>You are currently a member in the following activities</h3>
         </div>
       </div>
-
+      <div
+        className="ml-20 alert alert-danger hidden"
+        id="error-display"
+        role="alert"
+      >
+        {errors}
+      </div>
       <div className="table">
         <table>
           <thead>
@@ -93,9 +101,24 @@ export default function RMembership() {
               <th>Leave</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            {activities.map((activity, key) => {
+              return (
+                <tr key={key}>
+                  <td>{activity.id}</td>
+                  <td>{activity.activity_name}</td>
+                  <td>{activity.date_joined}</td>
+                  <td>
+                    <button onClick={() => exitactivity(activity.id)}>
+                      De Register
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
-        {activities.length}
+         
       </div>
 
       <div className="b-search">
@@ -114,23 +137,21 @@ export default function RMembership() {
             </tr>
           </thead>
           <tbody>
-          {allactivities.map((allactivity, key) => {
-            return (
-              <tr key={key}>
-                <td>{allactivity.id}</td>
-                <td>{allactivity.activity}</td>
+            {allactivities.map((allactivity, key) => {
+              return (
+                <tr key={key}>
+                  <td>{allactivity.id}</td>
+                  <td>{allactivity.activity}</td>
 
-                <td>
-                  <button onClick={() => deletesecurity(allactivity.id)}>
-                    Join
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+                  <td>
+                    <button onClick={() => joinactivity(allactivity.id)}>
+                      Join
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
-
-          
         </table>
       </div>
     </div>

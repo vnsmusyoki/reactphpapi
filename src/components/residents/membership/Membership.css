@@ -7,3 +7,9 @@
 .bottom{
     padding-bottom: 4rem
 }
+.hidden{
+    display: none;
+}
+.block-display {
+    display: block;
+}

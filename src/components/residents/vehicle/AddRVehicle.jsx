@@ -17,7 +17,7 @@ export default function AddRVehicle() {
     event.preventDefault();
     axios
       .put(
-        `http://localhost/students/Guacuco/api/residents/add_vehicle.php/${id}/edit`,
+        `http://localhost/students/Guacuco/api/residents/add_vehicle.php/${currentuser}/edit`,
         inputs
       )
       .then((response) => {
