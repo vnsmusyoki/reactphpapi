@@ -59,11 +59,11 @@ switch ($method) {
                     $mail->isSMTP();
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
-                    $mail->Username = 'endlesscript@gmail.com';
-                    $mail->Password = "ajvhnfdrkrssctmh";
+                    $mail->Username = '';  //Your sender email address
+                    $mail->Password = "ajvhnfdrkrssctmh"; // your account password - not email password
                     $mail->SMTPSecure = 'ssl';
                     $mail->Port = '465';
-                    $mail->setFrom('endlesscript@gmail.com');
+                    $mail->setFrom(''); //sender email address
                     $mail->addAddress($email);
                     $mail->isHTML(true);
                     $mail->Subject = "Welcome your account created successfully.";
