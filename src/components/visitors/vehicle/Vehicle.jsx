@@ -1,95 +1,110 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
-import RNavbar from "../navbar/GNavbar";
-
+import { Link, useParams } from "react-router-dom"; 
+import VNavbar from "../navbar/GNavbar";
 export default function VVehicle() {
-  
+  const [vehicles, setVehicles] = useState([]);
+  const [errors, setError] = useState("");
+  const { id } = useParams();
+  var currentuser = localStorage.getItem("userid");
+  useEffect(() => {
+    getResidents();
+  }, []);
+  function getResidents() {
+    fetch(`http://localhost/students/Guacuco/api/residents/all-vehicles.php/${currentuser}`)
+      .then((req) => req.json())
+      .then((data) => {
+        // console.log(data);
+        setVehicles(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+  const deleteResident = (id) => {
+    axios
+      .delete(
+        `http://localhost/students/Guacuco/api/residents/fetch_vehicle_profile.php/${id}`
+      )
+      .then(function (response) {
+        // console.log(response.data);
+        document.getElementById("error-display").classList.remove("hidden");
+        document.getElementById("error-display").classList.add("display-block");
+        document.getElementById("error-display").innerHTML =
+          "Car profile deleted successfully";
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+        getResidents();
+      })
+      .catch((e) => {
+        setError(e.response.data.message);
+        document.getElementById("error-display").classList.remove("hidden");
+        document.getElementById("error-display").classList.add("display-block");
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+      });
+  };
+   
 
   return (
     <div>
-      <RNavbar/>
+      <VNavbar />
       <div className="b-search">
         <div className="search-details">
-          <h3>Vehicles Registered Under You</h3>
-          
+          <h3>Vehicles Registered Under Your Account</h3>
+          <div className="search-manager">
+            <Link to="/v-vehicle/add">Upload New Car</Link>
+          </div>
         </div>
       </div>
-
-      <div className="table">
+      <div
+        className="ml-20 alert alert-danger hidden"
+        id="error-display"
+        role="alert"
+      >
+        {errors}
+      </div>
+      <div className="table bottom">
         <table>
-          <tr>
-            <th>Car Model</th>
-            <th>Registration Number</th>
-            <th>
-              Edit
-            </th>
-            <th>
-              Delete
-            </th>
-          </tr>
-          <tr>
-            <td>Toyota Camry</td>
-            <td>ABC-123</td>
-            <td>
-              <button>Edit</button>
-            </td>
-            <td>
-              <button>Delete</button>
-            </td>           
-          </tr>
-
-          <tr>
-            <td>Honda Civic</td>
-            <td>DEF-456</td>
-            <td>
-              <button>Edit</button>
-            </td>
-            <td>
-              <button>Delete</button>
-            </td>           
-          </tr>
-
-          <tr>
-            <td>Nissan Altima</td>
-            <td>GHI-789</td>
-            <td>
-              <button>Edit</button>
-            </td>
-            <td>
-              <button>Delete</button>
-            </td>           
-          </tr>
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>Car Model</th>
+              <th>Plate Number</th>
+              <th>Date Uploaded</th> 
+              <th>Edit</th> 
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {vehicles.map((vehicle, key) => {
+              return (
+                <tr key={key}>
+                  <td>{vehicle.id}</td>
+                  <td>{vehicle.car_model}</td>
+                  <td>{vehicle.reg_number}</td>
+                  <td>{vehicle.date_created}</td> 
+                  <td>
+                    <Link to={`/v-edit-vehicle/${vehicle.id}/edit`}>Edit</Link>
+                  </td> 
+                  <td>
+                    <button onClick={() => deleteResident(vehicle.id)}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
-      </div>
-
-      <div className="b-add-form">
-        <div className="b-add-form-form">
-          <form>
-            <h4>ADD VEHICLE DETAILS</h4>
-            <div>
-              <label>Registration Number:</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div>
-              <label>Model</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div>
-              <label>Drivers License Linked</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div className="b-add-form-send-btn">
-              <button>Add New Vehicle Details</button>
-            </div>
-          </form>
-        </div>
       </div>
     </div>
   );

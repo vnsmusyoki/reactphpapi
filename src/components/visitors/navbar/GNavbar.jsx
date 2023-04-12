@@ -1,7 +1,7 @@
 import hamburger from "../../../assets/hamburger.png";
 // import "./Navbar.css";
 import { NavLink,useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function VNavbar(props) {
@@ -10,7 +10,34 @@ export default function VNavbar(props) {
   function toggleNav() {
     setNavExpand((prevState) => !prevState);
 }
+var userid = localStorage.getItem("userid");
+useEffect(() => {
+  checkauthuser();
+}, []);
+function checkauthuser() {
+  var user = localStorage.getItem("category");
+  if (user !== "visitor") {
+    navigate("/login");
+  }
+}
+function logoutuser(e) {
+  e.preventDefault();
+  console.log(userid);
+  axios
+    .post(`http://localhost/students/Guacuco/api/logout.php/${userid}`)
+    .then((response) => {
+      console.log(response);
 
+      if (response.data[0].status == "1") {
+        localStorage.clear();
+        navigate("/login");
+        // localStorage.removeItem('accessToken');
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 
 
 

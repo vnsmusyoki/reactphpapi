@@ -75,6 +75,8 @@ import SChatroom from "./components/security/chatroom/Chatroom";
 import SChatroomChat from "./components/security/chatroom/SChatroomChat";
 import VChatroom from "./components/visitors/chatroom/Chatroom";
 import VVehicle from "./components/visitors/vehicle/Vehicle";
+import VVehicleAdd from "./components/visitors/vehicle/VVehicleAdd";
+import VVehicleEdit from "./components/visitors/vehicle/VVehicleEdit";
 import VTiming from "./components/visitors/timing/Timing";
 import VInstructions from "./components/visitors/instructions/Instructions";
 
@@ -167,6 +169,8 @@ function App() {
         {/* Visitors */}
         <Route path="/v-chat" element={<VChatroom />} />
         <Route path="/v-vehicle" element={<VVehicle />} />
+        <Route path="/v-vehicle/add" element={<VVehicleAdd />} />
+        <Route path="/v-edit-vehicle/:id/edit" element={<VVehicleEdit />} />
         <Route path="/v-timing" element={<VTiming />} />
         <Route path="/v-instructions" element={<VInstructions />} />
       </Routes>
