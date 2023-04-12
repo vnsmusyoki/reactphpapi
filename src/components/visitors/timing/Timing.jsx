@@ -1,147 +1,165 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
+// import "./Membership.css";
 import VNavbar from "../navbar/GNavbar";
-
+import axios from "axios";
 export default function VTiming() {
+  useEffect(() => {
+    enrolledactivites();
+    allactivites();
+  }, []);
+  var userid = localStorage.getItem("userid");
   
-
+  const [activities, setActivities] = useState([]);
+  const [errors, setError] = useState([]);
+  const [allactivities, setAllActivities] = useState([]);
+  function enrolledactivites() {
+    // console.log(userid);
+    fetch(`http://localhost/students/Guacuco/api/residents/enrolled-activities.php/${userid}`)
+      .then((req) => req.json())
+      .then((data) => {
+        // console.log(data);
+        // setUsers(data);
+        setActivities(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    
+  }
+  function allactivites() {
+    fetch("http://localhost/students/Guacuco/api/residents/all-activities.php")
+      .then((req) => req.json())
+      .then((data) => {
+        // console.log(data);
+        // setUsers(data);
+        setAllActivities(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+  const joinactivity = (id) => {
+    axios
+      .get(
+        `http://localhost/students/Guacuco/api/residents/join_activities.php/${id}/${userid}`
+      )
+      .then(function (response) {
+        console.log(response);
+        enrolledactivites();
+      })
+      .catch((e) => {
+        setError(e.response);
+        // document.getElementById("error-display").classList.remove("hidden");
+        // document.getElementById("error-display").classList.add("display-block");
+        // setTimeout(() => {
+        //   document.getElementById("error-display").classList.add("hidden");
+        //   document
+        //     .getElementById("error-display")
+        //     .classList.remove("display-block");
+        // }, 2000);
+        
+      });
+  };
+  const exitactivity = (id) => {
+    axios
+      .delete(
+        `http://localhost/students/Guacuco/api/residents/enrolled-activities.php/${id}`
+      )
+      .then(function (response) {
+        console.log(response);
+        enrolledactivites();
+      })
+      .catch((e) => {
+        setError(e.response);
+        
+      });
+  };
   return (
     <div>
-      <VNavbar/>
-
+      <VNavbar />
       <div className="b-search">
         <div className="search-details">
-          <h3>Gate Opening Hours</h3>
-          
+          <h3>You are currently a member in the following activities</h3>
         </div>
       </div>
-
+      <div
+        className="ml-20 alert alert-danger hidden"
+        id="error-display"
+        role="alert"
+      >
+        {errors}
+      </div>
       <div className="table">
         <table>
-          <tr>
-            
-            <th>Day of the Week	</th>
-            <th>Opening Gate Hours</th>
-            <th>Closing Gate Hours</th>
-          </tr>
-          <tr>
-            <td>Monday</td>
-            <td>4:00 AM</td>
-            <td>11:00 PM</td>           
-          </tr>
-          <tr>
-            <td>Tuesday</td>
-            <td>5:00 AM</td>
-            <td>11:00 PM</td>
-          </tr>   
-          <tr>
-            <td>Wednesday</td>
-            <td>4:00 AM</td>
-            <td>12:00 AM</td>
-          </tr>  
-          <tr>
-            <td>Thursday</td>
-            <td>4:00 AM</td>
-            <td>11:00 PM</td>
-          </tr> 
-          <tr>
-            <td>Friday</td>
-            <td>9:00 AM</td>
-            <td>5:00 PM</td>
-          </tr> 
-          <tr>
-            <td>Saturday</td>
-            <td>10:00 AM</td>
-            <td>4:00 PM</td>
-          </tr> 
-          <tr>
-            <td>Sunday</td>
-            <td>03:00 AM</td>
-            <td>11:00 PM</td>
-          </tr> 
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>Activity</th>
+              <th>Date Joined</th>
+              <th>Leave</th>
+            </tr>
+          </thead>
+          <tbody>
+            {activities.map((activity, key) => {
+              return (
+                <tr key={key}>
+                  <td>{activity.id}</td>
+                  <td>{activity.activity_name}</td>
+                  <td>{activity.date_joined}</td>
+                  <td>
+                    <button onClick={() => exitactivity(activity.id)}>
+                      De Register
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
+         
       </div>
 
       <div className="b-search">
         <div className="search-details">
-          <h3>Activities Opening Hours</h3>
-          
+          <h3>All Activities that might interest You!</h3>
         </div>
       </div>
 
-      <div className="table">
+      <div className="table bottom">
         <table>
-          <tr>
-            <th>Index</th>
-            <th>Activity</th>
-            <th>Open Hours(Weekdays)</th>
-            <th>Open Hours(weekends)</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Swimming</td>
-            <td>9:00 AM - 10:00 AM</td>
-            <td>6:00 AM - 8:00 PM</td>           
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Aerobics</td>
-            <td>10:30 AM - 11:30 AM</td>
-            <td>6:00 AM - 8:00 PM</td>
-          </tr>   
-          <tr>
-            <td>3</td>
-            <td>Yoga</td>
-            <td>12:00 PM - 1:00 PM</td>
-            <td>6:00 AM - 8:00 PM</td>
-          </tr>  
-          <tr>
-            <td>4</td>
-            <td>Spinning</td>
-            <td>2:00 PM - 3:00 PM</td>
-            <td>6:00 AM - 8:00 PM</td>
-          </tr> 
-          <tr>
-            <td>5</td>
-            <td>Zumba</td>
-            <td>4:00 PM - 5:00 PM</td>
-            <td>6:00 AM - 8:00 PM</td>
-          </tr> 
-          <tr>
-            <td>6</td>
-            <td>Pool</td>
-            <td>9:00 AM - 10:00 AM</td>
-            <td>6:00 AM - 8:00 PM</td>
-          </tr> 
-          <tr>
-            <td>7</td>
-            <td>Sauna</td>
-            <td>10:30 AM - 11:30 AM</td>
-            <td>6:00 AM - 8:00 PM</td>
-          </tr> 
-          <tr>
-            <td>8</td>
-            <td>Massage</td>
-            <td>12:00 PM - 1:00 PM</td>
-            <td>6:00 AM - 8:00 PM</td>
-          </tr>
-          <tr>
-            <td>9</td>
-            <td>Squash</td>
-            <td>2:00 PM - 3:00 PM</td>
-            <td>6:00 AM - 8:00 PM</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td>Table Tennis</td>
-            <td>4:00 PM - 5:00 PM</td>
-            <td>6:00 AM - 8:00 PM</td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>Activity</th>
+              <th>Starts From</th>
+              <th>Ends At</th>
+              <th>Date Created</th>
+              <th>Join</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allactivities.map((allactivity, key) => {
+              return (
+                <tr key={key}>
+                  <td>{allactivity.id}</td>
+                  <td>{allactivity.activity}</td>
+                  <td>{allactivity.starts_from}</td>
+                  <td>{allactivity.ends_at}</td>
+                  <td>{allactivity.date_created}</td>
+
+                  <td>
+                    <button onClick={() => joinactivity(allactivity.id)}>
+                      Join
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
-
-      
     </div>
   );
 }

@@ -74,11 +74,12 @@ import AddBResidents from "./components/building/residents/AddBResidents";
 import SChatroom from "./components/security/chatroom/Chatroom";
 import SChatroomChat from "./components/security/chatroom/SChatroomChat";
 import VChatroom from "./components/visitors/chatroom/Chatroom";
+import VChatroomChat from "./components/visitors/chatroom/VChatroomChat";
 import VVehicle from "./components/visitors/vehicle/Vehicle";
 import VVehicleAdd from "./components/visitors/vehicle/VVehicleAdd";
 import VVehicleEdit from "./components/visitors/vehicle/VVehicleEdit";
 import VTiming from "./components/visitors/timing/Timing";
-import VInstructions from "./components/visitors/instructions/Instructions";
+import VInstructions from "./components/visitors/instructions/Instructions"; 
 
 function App() {
   return (
@@ -173,6 +174,7 @@ function App() {
         <Route path="/v-edit-vehicle/:id/edit" element={<VVehicleEdit />} />
         <Route path="/v-timing" element={<VTiming />} />
         <Route path="/v-instructions" element={<VInstructions />} />
+        <Route path="/v-chatroom-chat/:id" element={<VChatroomChat />} />
       </Routes>
       {/* <Footer /> */}
     </div>

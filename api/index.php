@@ -5,10 +5,17 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 include 'db-connection.php';
 $method = $_SERVER['REQUEST_METHOD'];
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once './phpmailer/src/Exception.php';
+require_once './phpmailer/src/PhpMailer.php';
+require_once './phpmailer/src/SMTP.php';
 switch ($method) {
     case 'POST':
         $user = json_decode(file_get_contents('php://input'));
-       
+
         $name  = mysqli_real_escape_string($conn, $user->full_name);
         $email  = mysqli_real_escape_string($conn, $user->email);
         $phonenumber  = mysqli_real_escape_string($conn, $user->phone_number);
@@ -31,8 +38,8 @@ switch ($method) {
         } elseif ($passlength < 6) {
             http_response_code(400);
             echo json_encode(array('message' => 'Please password with minimum of 6 characters.'));
-            exit(); 
-        } elseif ($phonelength !== 10 ) {
+            exit();
+        } elseif ($phonelength !== 10) {
             http_response_code(400);
             echo json_encode(array('message' => 'Phone Number must have 10 digits.'));
             exit();
@@ -45,13 +52,34 @@ switch ($method) {
                 echo json_encode(array('message' => 'Email / Phone Number already exists'));
                 exit();
             } else {
-                $password = md5($user->password); 
-                $adduser = "INSERT INTO `users`(`full_names`, `email`, `category`, `password`, `phone_number`) VALUES ('$user->full_name', '$user->email', '$user->category', '$password', '$user->phone_number')";
-                $queryadduser = mysqli_query($conn, $adduser);
-                if ($queryadduser) {
-                    $response = ['status' => '1', 'message' => 'Account created successfully'];
-                    echo json_encode($response);
+                $password = md5($user->password);
+                $mail = new PHPMailer(true);
+                 
+                try {
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'endlesscript@gmail.com';
+                    $mail->Password = "ajvhnfdrkrssctmh";
+                    $mail->SMTPSecure = 'ssl';
+                    $mail->Port = '465';
+                    $mail->setFrom('endlesscript@gmail.com');
+                    $mail->addAddress($email);
+                    $mail->isHTML(true);
+                    $mail->Subject = "Welcome your account created successfully.";
+                    $mail->Body = "Welcome your account created successfully.";
+                    $mail->send();
+                    echo "dmkdmkdme sendedked";
+                } catch (Exception $e) {
+                    echo "Message not sent because of an error. Please try again later. {$mail->ErrorInfo}";
                 }
+
+                // $adduser = "INSERT INTO `users`(`full_names`, `email`, `category`, `password`, `phone_number`) VALUES ('$user->full_name', '$user->email', '$user->category', '$password', '$user->phone_number')";
+                // $queryadduser = mysqli_query($conn, $adduser);
+                // if ($queryadduser) {
+                //     $response = ['status' => '1', 'message' => 'Account created successfully'];
+                //     echo json_encode($response);
+                // }
                 break;
             }
         }
