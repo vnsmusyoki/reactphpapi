@@ -37,7 +37,9 @@ export default function Login() {
           }else if(res.data.category=="pool"){
             navigate("/p-dashboard");
           }else if(res.data.category=="gardener"){
-            navigate("/g-dashboard");
+            navigate("/g-dashboard"); 
+          }else if(res.data.category=="visitor"){
+            navigate("/v-vehicle");
           }else{
             alert("We could not process your request. Please try again with the valid credentials or create a new account.");
           }

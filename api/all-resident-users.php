@@ -7,7 +7,7 @@ include 'db-connection.php';
 $method = $_SERVER['REQUEST_METHOD'];
 switch ($method) {
     case 'GET':
-        $sql = "SELECT * FROM `users` WHERE `category` LIKE '%building%'";
+        $sql = "SELECT * FROM `users` WHERE `category` LIKE '%building%' OR `category` LIKE '%security%' OR `category` LIKE '%gardener%' OR `category` LIKE '%pool%'";
         $querysql = mysqli_query($conn, $sql);
         $queryrows = mysqli_num_rows($querysql);
         $users = array();
