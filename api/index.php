@@ -74,12 +74,12 @@ switch ($method) {
                     echo "Message not sent because of an error. Please try again later. {$mail->ErrorInfo}";
                 }
 
-                // $adduser = "INSERT INTO `users`(`full_names`, `email`, `category`, `password`, `phone_number`) VALUES ('$user->full_name', '$user->email', '$user->category', '$password', '$user->phone_number')";
-                // $queryadduser = mysqli_query($conn, $adduser);
-                // if ($queryadduser) {
-                //     $response = ['status' => '1', 'message' => 'Account created successfully'];
-                //     echo json_encode($response);
-                // }
+                $adduser = "INSERT INTO `users`(`full_names`, `email`, `category`, `password`, `phone_number`) VALUES ('$user->full_name', '$user->email', '$user->category', '$password', '$user->phone_number')";
+                $queryadduser = mysqli_query($conn, $adduser);
+                if ($queryadduser) {
+                    $response = ['status' => '1', 'message' => 'Account created successfully'];
+                    echo json_encode($response);
+                }
                 break;
             }
         }
