@@ -30,6 +30,9 @@ import BVisitors from "./components/building/visitors/Visitors";
 import AddBVisitors from "./components/building/visitors/AddBVisitors";
 import EditBVisitors from "./components/building/visitors/EditBVisitors";
 import GDashboard from "./components/garden/dashboard/GDashboard";
+import GTimings from "./components/garden/dashboard/GTimings";
+import GTimingsAdd from "./components/garden/dashboard/GTimingsAdd";
+import GTimingsEdit from "./components/garden/dashboard/GTimingsEdit";
 import GResidents from "./components/garden/residents/Residents";
 import AddGResidents from "./components/garden/residents/AddGResidents";
 import EditGResidents from "./components/garden/residents/EditGResidents";
@@ -58,7 +61,9 @@ import RMembership from "./components/residents/membership/Membership";
 import RPayments from "./components/residents/membership/RPayments";
 import RPaymentsAdd from "./components/residents/membership/RPaymentsAdd";
 import RPaymentsEdit from "./components/residents/membership/RPaymentsEdit";
-import SDashboard from "./components/security/dashboard/GDashboard";
+import RAccountUpdate from "./components/residents/membership/RAccountUpdate";
+import RAccountPassword from "./components/residents/membership/RAccountPassword";
+import SDashboard from "./components/security/dashboard/GDashboard"; 
 import SResidents from "./components/security/residents/Residents";
 import AddResidents from "./components/security/residents/AddResidents";
 import EditResident from "./components/security/residents/EditResident";
@@ -78,6 +83,8 @@ import VChatroomChat from "./components/visitors/chatroom/VChatroomChat";
 import VVehicle from "./components/visitors/vehicle/Vehicle";
 import VVehicleAdd from "./components/visitors/vehicle/VVehicleAdd";
 import VVehicleEdit from "./components/visitors/vehicle/VVehicleEdit";
+import VAccountUpdate from "./components/visitors/vehicle/VAccountUpdate";
+import VAccountPassword from "./components/visitors/vehicle/VAccountPassword";
 import VTiming from "./components/visitors/timing/Timing";
 import VInstructions from "./components/visitors/instructions/Instructions"; 
 
@@ -119,6 +126,9 @@ function App() {
 
         {/* Garden */}
         <Route path="/g-dashboard" element={<GDashboard />} />
+        <Route path="/g-timings" element={<GTimings />} />
+        <Route path="/g-timings/add" element={<GTimingsAdd />} />
+        <Route path="/g-activies-edit/:id/edit" element={<GTimingsEdit />} />
         <Route path="/g-residents" element={<GResidents />} />
         <Route path="/g-residents/add" element={<AddGResidents />} />
         <Route path="/g-residents-edit/:id/edit" element={<EditGResidents />} />
@@ -151,6 +161,8 @@ function App() {
         <Route path="/r-payments" element={<RPayments />} />
         <Route path="/r-payments/add" element={<RPaymentsAdd />} />
         <Route path="/r-edit-payment/:id/edit" element={<RPaymentsEdit />} />
+        <Route path="/r-update-account" element={<RAccountUpdate />} />
+        <Route path="/r-update-password" element={<RAccountPassword />} />
 
         {/* Security */}
         <Route path="/s-dashboard" element={<SDashboard />} />
@@ -175,6 +187,8 @@ function App() {
         <Route path="/v-timing" element={<VTiming />} />
         <Route path="/v-instructions" element={<VInstructions />} />
         <Route path="/v-chatroom-chat/:id" element={<VChatroomChat />} />
+        <Route path="/v-update-account" element={<VAccountUpdate />} />
+        <Route path="/v-update-password" element={<VAccountPassword />} />
       </Routes>
       {/* <Footer /> */}
     </div>

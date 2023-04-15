@@ -53,6 +53,8 @@ export default function RNavbar(props) {
           <NavLink to="/r-payments">Payments</NavLink>
           <NavLink to="/r-membership">Membership</NavLink>
           <NavLink to="/r-chat">Chatroom</NavLink>
+          <NavLink to="/r-update-account">My Account</NavLink>
+          <NavLink to="/r-update-password">Account Password</NavLink>
           <NavLink to="/">Logout</NavLink>
         </div>
       </div>

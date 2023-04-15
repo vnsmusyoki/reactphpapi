@@ -59,17 +59,17 @@ switch ($method) {
                     $mail->isSMTP();
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
-                    $mail->Username = '';  //Your sender email address
-                    $mail->Password = "ajvhnfdrkrssctmh"; // your account password - not email password
+                    $mail->Username = 'aschool489@gmail.com';  //Your sender email address
+                    $mail->Password = "kkacuunotbxwlbnc"; // your account password - not email password
                     $mail->SMTPSecure = 'ssl';
                     $mail->Port = '465';
-                    $mail->setFrom(''); //sender email address
+                    $mail->setFrom('aschool489@gmail.com'); //sender email address
                     $mail->addAddress($email);
                     $mail->isHTML(true);
                     $mail->Subject = "Welcome your account created successfully.";
                     $mail->Body = "Welcome your account created successfully.";
                     $mail->send();
-                    echo "dmkdmkdme sendedked";
+                    echo "Mail sent successfully.";
                 } catch (Exception $e) {
                     echo "Message not sent because of an error. Please try again later. {$mail->ErrorInfo}";
                 }

@@ -58,6 +58,8 @@ function logoutuser(e) {
           <NavLink to="/v-timing">Timings</NavLink>
           <NavLink to="/v-instructions">Driving Instructions</NavLink>
           <NavLink to="/v-chat">Chatroom</NavLink> 
+          <NavLink to="/v-update-account">Update Account</NavLink> 
+          <NavLink to="/v-update-password">Secure Account</NavLink> 
                 
           <NavLink to="/">Logout</NavLink>
         </div>

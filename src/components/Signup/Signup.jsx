@@ -23,8 +23,8 @@ export default function Signup() {
       console.log(response.data);
     })
     .catch(error => {
-      console.error(error.response.message); 
-      alert(error.response.data.message); 
+      console.error(error); 
+      alert(error); 
     }); 
   };
 
