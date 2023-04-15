@@ -45,8 +45,14 @@ import GChatroomChat from "./components/garden/chatroom/GChatroomChat";
 import PChatroom from "./components/pool/chatroom/Chatroom";
 import PChatroomChat from "./components/pool/chatroom/PChatroomChat";
 import PTiming from "./components/pool/timing/Timing";
+import PTimingAdd from "./components/pool/timing/PTimingAdd";
+import PTimingEdit from "./components/pool/timing/PTimingEdit";
 import PResidents from "./components/pool/residents/Residents";
+import PResidentsAdd from "./components/pool/residents/PResidentsAdd";
+import PResidentsEdit from "./components/pool/residents/PResidentsEdit";
 import PVisitors from "./components/pool/visitors/Visitors";
+import PVisitorsAdd from "./components/pool/visitors/PVisitorsAdd";
+import PVisitorsEdit from "./components/pool/visitors/PVisitorsEdit";
 import PDashboard from "./components/pool/dashboard/GDashboard";
 import PPool from "./components/pool/dashboard/PPool";
 import PPoolAdd from "./components/pool/dashboard/PPoolAdd";
@@ -143,11 +149,17 @@ function App() {
         <Route path="/p-chat" element={<PChatroom />} />
         <Route path="/p-chatroom-chat/:id" element={<PChatroomChat />} />
         <Route path="/p-timing" element={<PTiming />} />
+        <Route path="/p-timing/add" element={<PTimingAdd />} />
+        <Route path="/p-pool-timing/:id/edit" element={<PTimingEdit />} />
         <Route path="/p-all-pools" element={<PPool />} />
         <Route path="/p-all-pools/add" element={<PPoolAdd />} />
         <Route path="/p-all-pools-edit/:id/edit" element={<PPoolEdit />} />
         <Route path="/p-residents" element={<PResidents />} />
+        <Route path="/p-residents/add" element={<PResidentsAdd />} />
+        <Route path="/p-residents/:id/edit" element={<PResidentsEdit />} />
         <Route path="/p-visitors" element={<PVisitors />} />
+        <Route path="/p-visitors/add" element={<PVisitorsAdd />} />
+        <Route path="/p-edit-visitors/:id/edit" element={<PVisitorsEdit />} />
         <Route path="/p-dashboard" element={<PDashboard />} />
 
         {/* Residents */}

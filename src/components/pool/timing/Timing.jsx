@@ -1,86 +1,120 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react"; 
+import PNavbar from '../navbar/GNavbar';
+import { Link, useParams } from "react-router-dom"; 
+import axios from "axios";
 
-import { Link } from "react-router-dom";
-import PNavbar from "../navbar/GNavbar";
+
 
 export default function PTiming() {
   
+ 
+  const [users, setUsers] = useState([]);
+  const [errors, setError] = useState("");
+  const { id } = useParams();
+
+  function getResidents() {
+    //I've used fetch instead of axios
+    fetch("http://localhost/students/Guacuco/api/all-pools.php")
+      .then((req) => req.json())
+      .then((data) => {
+        // console.log(data);
+        setUsers(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+  const deleteResident = (id) => {
+    axios
+      .delete(
+        `http://localhost/students/Guacuco/api/security/fetch_resident_profile.php/${id}`
+      )
+      .then(function (response) {
+        // console.log(response.data);
+        document.getElementById("error-display").classList.remove("hidden");
+        document
+          .getElementById("error-display")
+          .classList.add("display-block");
+        document.getElementById("error-display").innerHTML =
+          "Account successfully deleted.";
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+        getResidents();
+      })
+      .catch((e) => {
+        setError(e.response.data.message);
+        document.getElementById("error-display").classList.remove("hidden");
+        document.getElementById("error-display").classList.add("display-block");
+        setTimeout(() => {
+          document.getElementById("error-display").classList.add("hidden");
+          document
+            .getElementById("error-display")
+            .classList.remove("display-block");
+        }, 2000);
+      });
+  };
+
+  useEffect(() => {
+    getResidents();
+  }, []);
 
   return (
     <div>
-      <PNavbar/>
+      <PNavbar />
       <div className="b-search">
         <div className="search-details">
-          <h3>Pools And Their Current State</h3>
-          
+          <h3>Pool Timings</h3>
+          <div className="search-manager"> 
+            <Link to='/p-timing/add'>Register Pool</Link>
+          </div>
         </div>
       </div>
-
-      <div className="table">
+      <div
+        className="ml-20 alert alert-danger hidden"
+        id="error-display"
+        role="alert"
+      >
+        {errors}
+      </div>
+      <div className="table bottom">
         <table>
-          <tr>
-            <th>Index</th>
-            <th>Pool</th>
-            <th>Opening Time</th>
-            <th>Timing</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Complex A</td>
-            <td>08: 00AM</td>
-            <td>2hrs</td>
-            <td>
-              <button>Edit</button>
-            </td>
-            <td>
-              <button>Delete</button>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Complex B</td>
-            <td>08: 00AM</td>
-            <td>2hrs</td>
-            <td>
-              <button>Edit</button>
-            </td>
-            <td>
-              <button>Delete</button>
-            </td>
-          </tr>     
-          
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>Pool Name</th>
+              <th>Capacity</th>
+              <th>Opening Time</th>
+              <th>Closing Time</th> 
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, key) => {
+              return (
+                <tr key={key}>
+                  <td>{user.id}</td>
+                  <td>{user.pool_name}</td>
+                  <td>{user.capacity}</td>
+                  <td>{user.opening_time}</td> 
+                  <td>{user.closing_time}</td> 
+                  <td>
+                    <Link to={`/p-pool-timing/${user.id}/edit`}>Edit</Link>
+                  </td>
+                  <td>
+                    <button onClick={() => deleteResident(user.id)}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
-      </div>
-
-      <div className="b-add-form">
-        <div className="b-add-form-form">
-          <form>
-            <h4>ADD POOL DETAILS</h4>
-            <div>
-              <label>Pool Location:</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div>
-              <label>Opening Time:</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div>
-              <label>Timing:</label>
-              <br />
-              <br />
-              <input type="text" />
-            </div>
-            <div className="b-add-form-send-btn">
-              <button>Add New Pool Details</button>
-            </div>
-          </form>
-        </div>
       </div>
     </div>
   );
