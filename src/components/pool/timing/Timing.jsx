@@ -27,7 +27,7 @@ export default function PTiming() {
   const deleteResident = (id) => {
     axios
       .delete(
-        `http://localhost/students/Guacuco/api/security/fetch_resident_profile.php/${id}`
+        `http://localhost/students/Guacuco/api/pools/fetch_pool_timing_profile.php/${id}`
       )
       .then(function (response) {
         // console.log(response.data);
@@ -36,7 +36,7 @@ export default function PTiming() {
           .getElementById("error-display")
           .classList.add("display-block");
         document.getElementById("error-display").innerHTML =
-          "Account successfully deleted.";
+          "Pool Record details deleted.";
         setTimeout(() => {
           document.getElementById("error-display").classList.add("hidden");
           document
@@ -89,6 +89,7 @@ export default function PTiming() {
               <th>Capacity</th>
               <th>Opening Time</th>
               <th>Closing Time</th> 
+              <th>Status</th> 
               <th>Edit</th>
               <th>Delete</th>
             </tr>
@@ -102,6 +103,7 @@ export default function PTiming() {
                   <td>{user.capacity}</td>
                   <td>{user.opening_time}</td> 
                   <td>{user.closing_time}</td> 
+                  <td>{user.status}</td> 
                   <td>
                     <Link to={`/p-pool-timing/${user.id}/edit`}>Edit</Link>
                   </td>

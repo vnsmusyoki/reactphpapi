@@ -11,7 +11,7 @@ switch ($method) {
         $user = json_decode(file_get_contents('php://input'));
         $name = $user->pool_name;
         $capacity =   $user->capacity;
-        $status = $user->pool_status;
+        $status = $user->status;
         $opening = $user->opening_time;
         $closing = $user->closing_time;
         if (empty($name) || empty($capacity) || empty($status) || empty($closing) || empty($opening)) {
@@ -60,7 +60,7 @@ switch ($method) {
         $user = json_decode(file_get_contents('php://input'));
         $name = $user->pool_name;
         $capacity =   $user->capacity;
-        $status = $user->pool_status;
+        $status = $user->status;
         $opening = $user->opening_time;
         $closing = $user->closing_time;
         if (empty($name) || empty($capacity) || empty($status) || empty($closing) || empty($opening)) {

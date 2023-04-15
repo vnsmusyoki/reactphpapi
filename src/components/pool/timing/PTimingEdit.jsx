@@ -32,7 +32,7 @@ export default function PVisitorsEdit() {
     event.preventDefault();
     axios
       .put(
-        `http://localhost/students/Guacuco/api/pools/fetch_pool.php/${id}/edit}`,
+        `http://localhost/students/Guacuco/api/pools/fetch_pool_timing_profile.php/${id}/edit`,
         inputs
       )
       .then((response) => {

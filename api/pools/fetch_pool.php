@@ -14,7 +14,6 @@ switch ($method) {
         $querysql = mysqli_query($conn, $sql);
         $queryrows = mysqli_num_rows($querysql);
         $pools = array();
-
         if ($queryrows > 0) {
             while ($row = mysqli_fetch_assoc($querysql)) {
                 $pools[] = $row;
@@ -22,5 +21,4 @@ switch ($method) {
         }
         echo json_encode($pools);
         break;
-    
 }

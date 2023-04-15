@@ -54,6 +54,8 @@ export default function PNavbar(props) {
           <NavLink to="/p-visitors">Visitors</NavLink>
           <NavLink to="/p-timing">Timings</NavLink>
           <NavLink to="/p-chat">Chatroom</NavLink>
+          <NavLink to="/p-update-account">My Account</NavLink>
+          <NavLink to="/p-update-password">Account Password</NavLink>
           <NavLink to="/">Logout</NavLink>
         </div>
       </div>

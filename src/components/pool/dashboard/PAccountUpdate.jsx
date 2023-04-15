@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
-import "./Visitors.css";
-import BNavbar from "../navbar/BNavbar";
-
+// import "./Membership.css";
+import PNavbar from '../navbar/GNavbar';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-export default function EditBVisitors() {
+export default function PAccountUpdate() {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({});
   const [errors, setErrors] = useState("");
+  var currentuser = localStorage.getItem("userid");
   const { id } = useParams();
   useEffect(() => {
-    getvisitordetails();
+    getSecurityofficer();
   }, []);
-  function getvisitordetails() {
+  function getSecurityofficer() {
     axios
       .get(
-        `http://localhost/students/Guacuco/api/building/fetch_visitors_profile.php/${id}`
+        `http://localhost/students/Guacuco/api/residents/get_profile_details.php/${currentuser}`
       )
       .then((response) => {
         setInputs(response.data[0]);
@@ -33,36 +33,37 @@ export default function EditBVisitors() {
     event.preventDefault();
     axios
       .put(
-        `http://localhost/students/Guacuco/api/building/fetch_visitors_profile.php/${id}/edit`,
+        `http://localhost/students/Guacuco/api/residents/get_profile_details.php/${currentuser}/edit`,
         inputs
       )
       .then((response) => {
-        navigate("/b-visitors");
-        console.log(response.data);
-        setInputs(response.data[0]);
+        navigate("/p-timing");
+        console.log(response);
+        setInputs(response);
       })
       .catch((error) => {
         console.log(error.response);
-        setErrors(error.response.data);
-        document.getElementById("error-display").classList.remove("hidden");
-        document.getElementById("error-display").classList.add("display-block");
-        setTimeout(() => {
-          document.getElementById("error-display").classList.add("hidden");
-          document
-            .getElementById("error-display")
-            .classList.remove("display-block");
-        }, 2000);
+        setErrors(error.response);
+        // document.getElementById("error-display").classList.remove("hidden");
+        // document.getElementById("error-display").classList.add("display-block");
+        // setTimeout(() => {
+        //   document.getElementById("error-display").classList.add("hidden");
+        //   document
+        //     .getElementById("error-display")
+        //     .classList.remove("display-block");
+        // }, 2000);
       });
   };
   return (
     <div>
-      <BNavbar />
+      <PNavbar />
       <div className="b-search">
         <div className="search-details">
-          <h3>Edit  Visitor - {inputs.full_names}</h3>
-          <div className="search-manager">
-            <Link to="/b-visitors">Return Back</Link>
-          </div>
+          <h3>Update Your Profile Here</h3>
+          <center> 
+
+          </center>
+         
         </div>
       </div>
       <div
@@ -76,13 +77,35 @@ export default function EditBVisitors() {
         <div className="b-add-form-forms">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Name:</label>
+              <label>Full Names:</label>
               <input
                 type="text"
                 className="form-control"
                 value={inputs.full_names}
                 required
                 name="full_names"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label>Email Address:</label>
+              <input
+                type="text"
+                className="form-control"
+                required
+                value={inputs.email}
+                name="email"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label>ID Number:</label>
+              <input
+                type="text"
+                className="form-control"
+                required
+                value={inputs.id_number}
+                name="id_number"
                 onChange={handleChange}
               />
             </div>
@@ -97,40 +120,10 @@ export default function EditBVisitors() {
                 onChange={handleChange}
               />
             </div>
+            
 
-            <div className="form-group">
-              <label>Gender:</label>
-              <select
-                name="gender"
-                id=""
-                onChange={handleChange}
-                className="form-control"
-                value={inputs.gender}
-                required
-              >
-                <option value="">click to select</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label>Destination:</label>
-              <select
-                name="visiting_area"
-                id=""
-                onChange={handleChange}
-                className="form-control"
-                value={inputs.visiting_area}
-                required
-              >
-                <option value="">click to select</option>
-                <option value="Gym">Gym</option>
-                <option value="Swimming Pool">Swimming Pool</option>
-              </select>
-            </div>
-        
             <div className="b-add-form-send-btn">
-              <button>Edit Visitor Details</button>
+              <button>Edit Account</button>
             </div>
           </form>
         </div>

@@ -54,6 +54,8 @@ import PVisitors from "./components/pool/visitors/Visitors";
 import PVisitorsAdd from "./components/pool/visitors/PVisitorsAdd";
 import PVisitorsEdit from "./components/pool/visitors/PVisitorsEdit";
 import PDashboard from "./components/pool/dashboard/GDashboard";
+import PAccountUpdate from "./components/pool/dashboard/PAccountUpdate";
+import PAccountPassword from "./components/pool/dashboard/PAccountPassword";
 import PPool from "./components/pool/dashboard/PPool";
 import PPoolAdd from "./components/pool/dashboard/PPoolAdd";
 import PPoolEdit from "./components/pool/dashboard/PPoolEdit";
@@ -161,6 +163,8 @@ function App() {
         <Route path="/p-visitors/add" element={<PVisitorsAdd />} />
         <Route path="/p-edit-visitors/:id/edit" element={<PVisitorsEdit />} />
         <Route path="/p-dashboard" element={<PDashboard />} />
+        <Route path="/p-update-account" element={<PAccountUpdate />} />
+        <Route path="/p-update-password" element={<PAccountPassword />} />
 
         {/* Residents */}
         <Route path="/r-chat" element={<RChatroom />} />
