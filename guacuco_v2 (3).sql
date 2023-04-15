@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 10, 2023 at 09:20 AM
+-- Generation Time: Apr 15, 2023 at 04:39 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.2.0
 
@@ -41,7 +41,7 @@ CREATE TABLE `activities` (
 --
 
 INSERT INTO `activities` (`id`, `activity`, `starts_from`, `subscribers`, `ends_at`, `date_created`) VALUES
-(1, 'FootBalls', '13:11:00', 1, '14:01:00', '2023-04-10 07:31:13'),
+(1, 'FootBalls', '13:11:00', 2, '14:01:00', '2023-04-10 07:31:13'),
 (3, 'BadMinton', '12:45:00', 1, '05:05:00', '2023-04-10 07:31:13'),
 (7, 'Activity Name', '14:21:00', 0, '17:21:00', '2023-04-10 08:21:45');
 
@@ -85,6 +85,19 @@ INSERT INTO `chats` (`id`, `sender_id`, `receiver_id`, `sender_name`, `receiver_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `garden_activities`
+--
+
+CREATE TABLE `garden_activities` (
+  `id` int NOT NULL,
+  `activity` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `operating_hours`
 --
 
@@ -117,7 +130,8 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`id`, `user_id`, `name`, `phone_number`, `amount`, `status`, `code`, `date_created`) VALUES
-(2, 20, 'kmdekmde kdmekde', '88884453', 500, 'Rejected', 'kmjnhdsd', '2023-04-10 07:25:54');
+(2, 20, 'kmdekmde kdmekde', '88884453', 500, 'Rejected', 'kmjnhdsd', '2023-04-10 07:25:54'),
+(3, 20, 'kmdekmde kdmekde', '88884453', 500, 'Pending', 'ikjhgbnm', '2023-04-10 19:22:35');
 
 -- --------------------------------------------------------
 
@@ -130,6 +144,8 @@ CREATE TABLE `pools` (
   `pool_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `capacity` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `opening_time` time DEFAULT NULL,
+  `closing_time` time DEFAULT NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -137,8 +153,8 @@ CREATE TABLE `pools` (
 -- Dumping data for table `pools`
 --
 
-INSERT INTO `pools` (`id`, `pool_name`, `capacity`, `status`, `date_created`) VALUES
-(2, 'Edited pool Account', '400', 'Closed', '2023-04-09 00:09:41');
+INSERT INTO `pools` (`id`, `pool_name`, `capacity`, `status`, `opening_time`, `closing_time`, `date_created`) VALUES
+(3, 'Edited pool Accounts', '18:35', 'Opened', '00:04:00', '14:31:00', '2023-04-15 11:31:32');
 
 -- --------------------------------------------------------
 
@@ -177,15 +193,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `full_names`, `email`, `category`, `password`, `gender`, `id_number`, `phone_number`, `shift`, `area_assigned`, `token`) VALUES
-(2, 'evans kimeu dkmekde', 'admin@app.com', 'building', '5f4dcc3b5aa765d61d8327deb882cf99', NULL, NULL, NULL, NULL, NULL, '75500100e057a96a1041e84a8083f872250ace9d4897934b535d774f737e6b92'),
 (8, 'testing register', 'refisyef@gmail.com', '/r-membership', '5f4dcc3b5aa765d61d8327deb882cf99', NULL, NULL, NULL, NULL, NULL, NULL),
 (9, 'Joseph Joseph', 'josephtest@gmail.com', 'security', '5f4dcc3b5aa765d61d8327deb882cf99', NULL, NULL, NULL, NULL, NULL, NULL),
 (11, 'kim tesiden', 'kims@gmail.com', 'resident', '5f4dcc3b5aa765d61d8327deb882cf99', 'Male', '87653209', '9876543908', NULL, NULL, 'f22921c7f53be49e4bea58a2ac2afd6baff7766158341047e60c4af3e6e0773c'),
 (14, 'demc d mcd', 'smwks@gmail.com', 'resident', '5f4dcc3b5aa765d61d8327deb882cf99', 'Male', '34532345', '1112223212', NULL, NULL, NULL),
-(15, 'pool Manager', 'poolmanager@gmail.com', 'pool', '5f4dcc3b5aa765d61d8327deb882cf99', 'Male', '98374834', '3749384858', NULL, NULL, NULL),
+(15, 'pool Managers', 'poolmanager@gmail.com', 'pool', '48cccca3bab2ad18832233ee8dff1b0b', 'Male', '98374834', '3749384858', NULL, NULL, '5d0609698a18f138a63a748fbea092226be0919e8bffb325f88ec5af9e3700ba'),
 (16, 'Gardener One', 'gardener@gmail.com', 'gardener', '5f4dcc3b5aa765d61d8327deb882cf99', 'Male', '98733000', '4720882594', NULL, 'Business', 'b87d526b74173da9151b0bec08ebebb52656b6dfb9e2bef49fc4d8e67e6ab806'),
-(18, 'Gardener Three', 'vnsmusyoki@gmail.com', 'gardener', '5f4dcc3b5aa765d61d8327deb882cf99', 'Male', '98733232', '2705176438', NULL, 'Business', NULL),
-(20, 'kmdekmde kdmekde', 'kd@gmail.com', 'resident', '5f4dcc3b5aa765d61d8327deb882cf99', NULL, '4398733230', '88884453', NULL, NULL, 'e8692bedd1b59ae8693ff79c4a229ecd8e3758f44463339f9126e2fbf35da3ca');
+(18, 'Gardener Three', 'vndsmusyoki@gmail.com', 'gardener', '5f4dcc3b5aa765d61d8327deb882cf99', 'Male', '98733232', '2705176438', NULL, 'Business', NULL),
+(20, 'kmdekmde kdmekde', 'kd@gmail.com', 'resident', '5f4dcc3b5aa765d61d8327deb882cf99', NULL, '4398733230', '88884453', NULL, NULL, 'e8692bedd1b59ae8693ff79c4a229ecd8e3758f44463339f9126e2fbf35da3ca'),
+(21, 'visitor account', 'visitor@gmail.com', 'visitor', '5f4dcc3b5aa765d61d8327deb882cf99', NULL, NULL, '9875438974', NULL, NULL, '027b96fa59d772ce7260dbf73318c80b7c89879ad1c725c09bae0c579b12a83c'),
+(23, 'Joesphat Name', 'kipchumbadennis10@gmail.com', 'visitor', 'bee50a7f83d5119426eb6a8a81e29042', NULL, NULL, '7776666478', NULL, NULL, NULL),
+(25, 'test', 'testresident@gmail.com', 'resident', '5f4dcc3b5aa765d61d8327deb882cf99', NULL, '43434343', '2221118921', NULL, NULL, '87e26377cfe5d1c71bbe62193e04dd3330a04b0970c270f8f7c77e7ecace566f'),
+(26, 'garden check', 'visitored@gmail.com', 'visitor', '5f4dcc3b5aa765d61d8327deb882cf99', NULL, '99955545', '4443332323', NULL, NULL, '634939ebd2d60edf5bc314efb6b8fdd697ec3cb18495f09544df9320d6ec460c');
 
 -- --------------------------------------------------------
 
@@ -207,7 +226,8 @@ CREATE TABLE `user_enrolled_activities` (
 
 INSERT INTO `user_enrolled_activities` (`id`, `user_id`, `activity_id`, `date_joined`, `activity_name`) VALUES
 (21, 20, 1, '2023-04-10 09:19:50', 'FootBalls'),
-(22, 20, 3, '2023-04-10 09:19:52', 'BadMinton');
+(22, 20, 3, '2023-04-10 09:19:52', 'BadMinton'),
+(27, 26, 1, '2023-04-15 09:59:30', 'FootBalls');
 
 -- --------------------------------------------------------
 
@@ -222,6 +242,13 @@ CREATE TABLE `vehicles` (
   `reg_number` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `vehicles`
+--
+
+INSERT INTO `vehicles` (`id`, `user_id`, `car_model`, `reg_number`, `date_created`) VALUES
+(3, 21, 'Vehicle AM', '76hdgftr', '2023-04-12 09:34:47');
 
 -- --------------------------------------------------------
 
@@ -244,7 +271,7 @@ CREATE TABLE `visitors` (
 --
 
 INSERT INTO `visitors` (`id`, `full_names`, `phone_number`, `visiting_area`, `check_in`, `check_out`, `gender`) VALUES
-(1, 'visitor one', '4333234590', 'Gym', 'Apr, 09 2023, 11:11:48 AM', 'Apr, 09 2023, 11:37:35 AM', 'Male'),
+(1, 'visitor one', '4333234590', 'Swimming Pool', 'Apr, 09 2023, 11:11:48 AM', 'Apr, 09 2023, 11:37:35 AM', 'Male'),
 (3, 'new visitors', '4333234590', 'Gym', 'Apr, 09 2023, 01:28:35 PM', 'Apr, 09 2023, 01:35:16 PM', 'Male');
 
 --
@@ -261,6 +288,12 @@ ALTER TABLE `activities`
 -- Indexes for table `chats`
 --
 ALTER TABLE `chats`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `garden_activities`
+--
+ALTER TABLE `garden_activities`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -330,6 +363,12 @@ ALTER TABLE `chats`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `garden_activities`
+--
+ALTER TABLE `garden_activities`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `operating_hours`
 --
 ALTER TABLE `operating_hours`
@@ -339,13 +378,13 @@ ALTER TABLE `operating_hours`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pools`
 --
 ALTER TABLE `pools`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `rentals`
@@ -357,25 +396,25 @@ ALTER TABLE `rentals`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `user_enrolled_activities`
 --
 ALTER TABLE `user_enrolled_activities`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `visitors`
 --
 ALTER TABLE `visitors`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
